@@ -23,6 +23,10 @@ export const metadata: Metadata = {
   title: 'MENCINE CO LTD - Smoke-Free Thermal Waste Destruction',
   description: 'Award-winning Tanzanian environmental technology company pioneering decentralized, smoke-free waste destruction infrastructure for hygiene products and bio-medical waste.',
   generator: 'v0.app',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({
@@ -31,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-background">
+    <html lang="en" className="bg-background" data-scroll-behavior="smooth">
       <body className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased`}>
         {children}
         <Analytics />

@@ -182,7 +182,7 @@ export default function ProductsPage() {
               <RequestQuoteDialog />
             </div>
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
                 <Image
                   src="/images/incinerator-product.jpg"
                   alt="Mencine Dual-Chamber Incinerator"
