@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
@@ -23,6 +24,11 @@ import {
   HeartPulse,
   ShieldAlert,
 } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: 'Our Products & Services',
+  description: 'Explore the Mencine Compact Dual-Chamber Diesel Incinerator and our environmental services for schools and hospitals.',
+}
 
 const specifications = [
   {
