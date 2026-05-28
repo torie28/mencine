@@ -30,7 +30,7 @@ export function Navigation() {
                 src="/images/WIKI%20CLUB%20LOGO%20(5).png"
                 alt="Mencine logo"
                 fill
-                priority
+                loading="eager"
                 className="object-contain scale-[2.5] -translate-y-5"
               />
             </div>
