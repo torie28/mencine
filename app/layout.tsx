@@ -24,10 +24,17 @@ export const metadata: Metadata = {
   description: 'Award-winning Tanzanian environmental technology company pioneering decentralized, smoke-free waste destruction infrastructure for hygiene products and bio-medical waste.',
   generator: 'v0.app',
   icons: {
-    icon: '/icon.svg',
-    apple: '/apple-icon.png',
+    icon: [
+      { url: '/images/WIKI%20CLUB%20LOGO%20(5).png', sizes: '32x32',  type: 'image/png' },
+      { url: '/images/WIKI%20CLUB%20LOGO%20(5).png', sizes: '192x192', type: 'image/png' },
+      { url: '/images/WIKI%20CLUB%20LOGO%20(5).png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: { url: '/images/WIKI%20CLUB%20LOGO%20(5).png', sizes: '180x180', type: 'image/png' },
   },
+
+
 }
+
 
 export default function RootLayout({
   children,

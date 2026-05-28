@@ -30,8 +30,8 @@ export function Navigation() {
                 src="/images/WIKI%20CLUB%20LOGO%20(5).png"
                 alt="Mencine logo"
                 fill
-                priority
-                className="object-contain scale-[2.5] -translate-y-5"
+                loading="eager"
+                className="object-contain scale-[2.5] -translate-y-2"
               />
             </div>
             <div className="flex flex-col">
