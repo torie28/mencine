@@ -31,7 +31,7 @@ export function Navigation() {
                 alt="Mencine logo"
                 fill
                 loading="eager"
-                className="object-contain scale-[2.5] -translate-y-5"
+                className="object-contain scale-[2.5] -translate-y-2"
               />
             </div>
             <div className="flex flex-col">
