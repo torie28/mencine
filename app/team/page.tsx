@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
 import { Linkedin, Mail } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: 'Our Team',
+  description: 'Meet the executive leadership team at Mencine Co Ltd driving innovation in Tanzanian environmental technology.',
+}
 
 const teamMembers = [
   {
