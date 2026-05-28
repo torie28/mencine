@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Leaf, Mail, Phone, MapPin } from "lucide-react"
+import Image from "next/image"
+import { Mail, Phone, MapPin, Instagram, Linkedin } from "lucide-react"
 
 const footerLinks = {
   company: [
@@ -31,13 +32,17 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
-                <Leaf className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-lg font-bold tracking-tight text-background">MENCINE</span>
-                <span className="text-[10px] text-background/60 tracking-widest uppercase">CO LTD</span>
-              </div>
+                {/*<div className="relative w-50 h-40 shrink-0">
+                  <Image
+                    src="/images/WIKI%20CLUB%20LOGO%20(5).png"
+                    alt="Mencine logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>*/}
+                <div className="flex flex-col mt-2">
+                  <span className="text-lg font-bold tracking-tight text-background">MENCINE CO LTD</span>
+                  </div>
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
               Award-winning Tanzanian environmental technology company pioneering smoke-free waste destruction infrastructure.
@@ -111,9 +116,30 @@ export function Footer() {
             <p className="text-sm text-background/50">
               &copy; {new Date().getFullYear()} Mencine Co Ltd. All rights reserved.
             </p>
+            <div className="flex items-center gap-4">
+              <a
+                href="https://www.instagram.com/mencine_co_ltd/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="text-background/50 hover:text-background transition-colors"
+              >
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/tarsila-mellita-a1a316212/?originalSubdomain=tz"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="text-background/50 hover:text-background transition-colors"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
             <p className="text-sm text-background/50">
               BRELA Registered Entity | Tanzania
             </p>
+
           </div>
         </div>
       </div>

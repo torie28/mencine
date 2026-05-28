@@ -36,11 +36,11 @@ export function Navigation() {
             </div>
             <div className="flex flex-col">
               <span className="text-lg font-bold tracking-tight text-foreground">
-                MENCINE
+                MENCINE CO LTD
               </span>
-              <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
+              {/*<span className="text-[10px] text-muted-foreground tracking-widest uppercase">
                 CO LTD
-              </span>
+              </span>*/}
             </div>
           </Link>
 
