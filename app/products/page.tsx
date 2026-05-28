@@ -3,59 +3,75 @@ import { Footer } from "@/components/footer"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { 
-  Flame, Wind, Timer, Gauge, Ruler, Thermometer, Droplets, Box,
-  ArrowRight, CheckCircle, Wrench, FileText, HeadphonesIcon
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { RequestQuoteDialog } from "@/components/request-quote-dialog"
+import {
+  Flame,
+  Wind,
+  Timer,
+  Gauge,
+  Ruler,
+  Thermometer,
+  Droplets,
+  Box,
+  ArrowRight,
+  CheckCircle,
+  Wrench,
+  FileText,
+  HeadphonesIcon,
+  Trash2,
+  HeartPulse,
+  ShieldAlert,
 } from "lucide-react"
 
 const specifications = [
-  { 
-    icon: Flame, 
-    param: "Primary Chamber Operating Temperature", 
-    spec: "875 °C", 
-    metric: "Rapid flash-pyrolysis and immediate core volume reduction." 
+  {
+    icon: Flame,
+    param: "Primary Chamber Operating Temperature",
+    spec: "875 °C",
+    metric: "Rapid flash-pyrolysis and immediate core volume reduction.",
   },
-  { 
-    icon: Wind, 
-    param: "Secondary Afterburner Temperature", 
-    spec: "1,025 °C", 
-    metric: "Intense oxidation zone powered by a 13.63 kW burner." 
+  {
+    icon: Wind,
+    param: "Secondary Afterburner Temperature",
+    spec: "1,025 °C",
+    metric: "Intense oxidation zone powered by a 13.63 kW burner.",
   },
-  { 
-    icon: Timer, 
-    param: "Secondary Gas Residence Time", 
-    spec: "2.005 Seconds", 
-    metric: "Exceeds regulatory compliance for complete smoke/odor breakdown." 
+  {
+    icon: Timer,
+    param: "Secondary Gas Residence Time",
+    spec: "2.005 Seconds",
+    metric: "Exceeds regulatory compliance for complete smoke/odor breakdown.",
   },
-  { 
-    icon: Gauge, 
-    param: "Calibrated System Airflow Rate", 
-    spec: "112 m³/h", 
-    metric: "Blower setpoint optimized to match perfect fuel stoichiometry." 
+  {
+    icon: Gauge,
+    param: "Calibrated System Airflow Rate",
+    spec: "112 m³/h",
+    metric: "Blower setpoint optimized to match perfect fuel stoichiometry.",
   },
-  { 
-    icon: Box, 
-    param: "Refractory Insulation Profile", 
-    spec: "100 mm Blocks", 
-    metric: "Reduces wall transient heat loss by 31% over baseline models." 
+  {
+    icon: Box,
+    param: "Refractory Insulation Profile",
+    spec: "100 mm Blocks",
+    metric: "Reduces wall transient heat loss by 31% over baseline models.",
   },
-  { 
-    icon: Droplets, 
-    param: "Fuel Economy Coefficient", 
-    spec: "0.300 L / Cycle", 
-    metric: "Ultra-low operating overhead (Diesel fuel matrix)." 
+  {
+    icon: Droplets,
+    param: "Fuel Economy Coefficient",
+    spec: "0.300 L / Cycle",
+    metric: "Ultra-low operating overhead (Diesel fuel matrix).",
   },
-  { 
-    icon: Thermometer, 
-    param: "Outer Casing Skin Temperature", 
-    spec: "104.8 °C Max", 
-    metric: "Thermally stable 'cool-touch' casing safe for tight urban spots." 
+  {
+    icon: Thermometer,
+    param: "Outer Casing Skin Temperature",
+    spec: "104.8 °C Max",
+    metric: "Thermally stable 'cool-touch' casing safe for tight urban spots.",
   },
-  { 
-    icon: Ruler, 
-    param: "Physical Footprint & Height", 
-    spec: "1.95m × 0.95m | 5.08m", 
-    metric: "Compact layout paired with a 3.5m insulated SS304 stack." 
+  {
+    icon: Ruler,
+    param: "Physical Footprint & Height",
+    spec: "1.95m × 0.95m | 5.08m",
+    metric: "Compact layout paired with a 3.5m insulated SS304 stack.",
   },
 ]
 
@@ -63,22 +79,82 @@ const services = [
   {
     icon: Box,
     title: "Direct Hardware Sales",
-    description: "Purchase our Compact Dual-Chamber Diesel Incinerators outright for permanent installation at your facility."
+    description:
+      "Purchase our Compact Dual-Chamber Diesel Incinerators outright for permanent installation at your facility.",
   },
   {
     icon: FileText,
     title: "Equipment Leasing",
-    description: "Flexible equipment leasing models designed specifically for public institutions and budget-constrained organizations."
+    description:
+      "Flexible equipment leasing models designed specifically for public institutions and budget-constrained organizations.",
   },
   {
     icon: Wrench,
     title: "Maintenance Contracts (SLAs)",
-    description: "Preventative maintenance service contracts ensuring optimal performance and longevity of your equipment."
+    description:
+      "Preventative maintenance service contracts ensuring optimal performance and longevity of your equipment.",
   },
   {
     icon: HeadphonesIcon,
     title: "Technical Consulting",
-    description: "Expert waste stream consulting to help institutions develop comprehensive waste management strategies."
+    description:
+      "Expert waste stream consulting to help institutions develop comprehensive waste management strategies.",
+  },
+]
+
+const wasteCategories = [
+  {
+    value: "general",
+    label: "General Waste",
+    icon: Trash2,
+    title: "General Waste Incinerator View",
+    description:
+      "Explore how the Mencine compact dual-chamber incinerator supports decentralized destruction of routine combustible waste generated by institutions, estates, hospitality facilities, and commercial sites.",
+    examples: [
+      "Paper, cardboard, and light packaging waste",
+      "Food-contaminated disposables from facilities",
+      "General sanitary and operational waste streams",
+    ],
+    fit:
+      "Ideal for schools, office compounds, estates, hospitality facilities, and light industrial environments.",
+    note:
+      "For best performance, waste should be sorted to remove metals, glass, and heavily wet non-combustibles.",
+  },
+  {
+    value: "medical",
+    label: "Hospital & Medical Waste",
+    icon: HeartPulse,
+    title: "Hospital & Medical Waste Incinerator View",
+    description:
+      "View the incinerator as a high-temperature solution for hospitals, clinics, laboratories, and healthcare environments where infectious, clinical, or sensitive waste requires dependable thermal destruction.",
+    examples: [
+      "Infectious waste",
+      "Pathological waste",
+      "Pharmaceutical waste",
+      "Clinical and ward disposables",
+    ],
+    fit:
+      "Suitable for hospitals, clinics, laboratories, maternity centers, and other medical institutions.",
+    note:
+      "High-temperature dual-chamber combustion helps reduce smoke, odors, and pathogen risk during treatment of hospital and medical waste streams.",
+  },
+  {
+    value: "hazardous",
+    label: "Hazardous & Pollution Control",
+    icon: ShieldAlert,
+    title: "Hazardous Waste & Pollution-Control View",
+    description:
+      "Assess the incinerator for controlled treatment of selected hazardous and difficult sanitary waste streams where pollution control, secure destruction, and disciplined operation are essential, including commercial diapers and menstrual pads.",
+    examples: [
+      "Contaminated packaging and absorbents",
+      "Chemically exposed disposable materials",
+      "Commercial diapers and incontinence products",
+      "Menstrual pads and related sanitary waste",
+    ],
+    fit:
+      "Relevant for industrial sites, sanitation programs, hospitals, specialized treatment facilities, and institutions seeking improved pollution control for difficult waste streams.",
+    note:
+      "This category is especially useful where open dumping or open burning of sanitary waste such as diapers and menstrual pads creates odor, smoke, and pollution-control concerns. Hazardous waste compatibility should still be reviewed case-by-case for regulatory compliance.",
   },
 ]
 
@@ -86,26 +162,24 @@ export default function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
       <Navigation />
-      
+
       {/* Hero */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">Products & Services</p>
+              <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-4">
+                Products & Services
+              </p>
               <h1 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-6 leading-tight">
                 Advanced Thermal Destruction Technology
               </h1>
               <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-                The Mencine Compact Dual-Chamber Diesel Incinerator offers high-temperature decentralized 
-                thermal destruction with unmatched efficiency and environmental compliance.
+                The Mencine Compact Dual-Chamber Diesel Incinerator offers
+                high-temperature decentralized thermal destruction with
+                unmatched efficiency and environmental compliance.
               </p>
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2">
-                <Link href="/contact">
-                  Request a Quote
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </Button>
+              <RequestQuoteDialog />
             </div>
             <div className="relative">
               <div className="aspect-square rounded-2xl overflow-hidden shadow-2xl">
@@ -129,8 +203,9 @@ export default function ProductsPage() {
               Product Capabilities
             </h2>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Within a single 30-minute automated cycle, our incinerator reduces up to 2.0 kg of solid waste 
-              into minimal, sterile, inert ash.
+              Within a single 30-minute automated cycle, our incinerator
+              reduces up to 2.0 kg of solid waste into minimal, sterile, inert
+              ash.
             </p>
           </div>
 
@@ -139,22 +214,26 @@ export default function ProductsPage() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                 <CheckCircle className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-bold text-foreground mb-3">Hygiene Waste</h3>
+              <h3 className="font-display text-xl font-bold text-foreground mb-3">
+                General & Hygiene Waste
+              </h3>
               <p className="text-muted-foreground mb-4">
-                Commercial sanitary pads and baby diapers containing complex superabsorbent polymers and plastics.
+                Everyday institutional and sanitary waste streams including
+                commercial menstrual pads, baby diapers, and similar combustible
+                hygiene waste.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Sanitary towels
+                  Sanitary towels and menstrual pads
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Baby diapers
+                  Baby diapers and incontinence products
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Incontinence products
+                  Routine combustible facility waste
                 </li>
               </ul>
             </div>
@@ -163,9 +242,13 @@ export default function ProductsPage() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                 <CheckCircle className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-bold text-foreground mb-3">Medical Waste</h3>
+              <h3 className="font-display text-xl font-bold text-foreground mb-3">
+                Hospital & Medical Waste
+              </h3>
               <p className="text-muted-foreground mb-4">
-                Bio-medical waste requiring high-temperature destruction to eliminate pathogens and hazardous materials.
+                Hospital and bio-medical waste requiring high-temperature
+                destruction to reduce pathogens, odors, and sensitive clinical
+                residues.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
@@ -178,7 +261,7 @@ export default function ProductsPage() {
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Pharmaceutical waste
+                  Pharmaceutical and clinical disposables
                 </li>
               </ul>
             </div>
@@ -187,26 +270,167 @@ export default function ProductsPage() {
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                 <CheckCircle className="w-7 h-7 text-primary" />
               </div>
-              <h3 className="font-display text-xl font-bold text-foreground mb-3">Smoke-Free Output</h3>
+              <h3 className="font-display text-xl font-bold text-foreground mb-3">
+                Hazardous & Pollution-Control Waste
+              </h3>
               <p className="text-muted-foreground mb-4">
-                Advanced dual-combustion architecture ensures complete destruction with clean exhaust profile.
+                Controlled treatment for difficult waste streams where pollution
+                control is essential, including commercial diapers, menstrual
+                pads, and contaminated disposables.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Zero visible smoke
+                  Commercial diapers and sanitary waste
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  No toxic emissions
+                  Menstrual pads and related hygiene products
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Sterile inert ash output
+                  Contaminated absorbents and exposed disposables
                 </li>
               </ul>
             </div>
           </div>
+        </div>
+      </section>
+
+
+      {/* Browse by Waste Category */}
+      <section className="py-20 bg-secondary/20" id="categories">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
+              Browse by Waste Category
+            </h2>
+            <p className="text-muted-foreground max-w-3xl mx-auto">
+              Select a waste category to view how the Mencine compact
+              dual-chamber incinerator can be positioned for different
+              operational needs.
+            </p>
+          </div>
+
+          <Tabs defaultValue="general" className="gap-8">
+            <div className="flex justify-center">
+              <TabsList className="h-auto w-full max-w-3xl flex-col gap-2 rounded-2xl bg-muted/80 p-2 sm:grid sm:grid-cols-3">
+                {wasteCategories.map((category) => {
+                  const Icon = category.icon
+
+                  return (
+                    <TabsTrigger
+                      key={category.value}
+                      value={category.value}
+                      className="h-auto rounded-xl px-4 py-3"
+                    >
+                      <Icon className="w-4 h-4" />
+                      {category.label}
+                    </TabsTrigger>
+                  )
+                })}
+              </TabsList>
+            </div>
+
+            {wasteCategories.map((category) => {
+              const Icon = category.icon
+
+              return (
+                <TabsContent key={category.value} value={category.value}>
+                  <div className="grid lg:grid-cols-[1.15fr_0.85fr] gap-8">
+                    <div className="bg-card rounded-2xl p-8 border border-border">
+                      <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                        <Icon className="w-7 h-7 text-primary" />
+                      </div>
+
+                      <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+                        Waste Category
+                      </p>
+
+                      <h3 className="font-display text-2xl font-bold text-foreground mb-4">
+                        {category.title}
+                      </h3>
+
+                      <p className="text-muted-foreground mb-8">
+                        {category.description}
+                      </p>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <h4 className="font-semibold text-foreground mb-4">
+                            Typical Waste Streams
+                          </h4>
+                          <ul className="space-y-3">
+                            {category.examples.map((item) => (
+                              <li
+                                key={item}
+                                className="flex items-start gap-3 text-sm text-muted-foreground"
+                              >
+                                <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+
+                        <div className="space-y-4">
+                          <div className="rounded-xl border border-primary/10 bg-primary/5 p-5">
+                            <p className="text-sm font-semibold text-foreground mb-2">
+                              Best Fit
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {category.fit}
+                            </p>
+                          </div>
+
+                          <div className="rounded-xl border border-border bg-secondary/60 p-5">
+                            <p className="text-sm font-semibold text-foreground mb-2">
+                              Operational Note
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                              {category.note}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-card rounded-2xl border border-border overflow-hidden">
+                      <div className="relative aspect-[4/3]">
+                        <Image
+                          src="/images/incinerator-product.jpg"
+                          alt={`${category.label} incinerator application`}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+
+                      <div className="p-6">
+                        <p className="text-sm font-semibold text-primary uppercase tracking-wider mb-3">
+                          Product View
+                        </p>
+                        <h4 className="font-display text-xl font-bold text-foreground mb-3">
+                          Compact Dual-Chamber Diesel Incinerator
+                        </h4>
+                        <p className="text-muted-foreground mb-6">
+                          A compact, high-temperature thermal destruction system
+                          that can be evaluated against your selected waste
+                          category and site operating requirements.
+                        </p>
+
+                        <Button asChild className="gap-2">
+                          <Link href="/contact">
+                            Discuss This Category
+                            <ArrowRight className="w-4 h-4" />
+                          </Link>
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </TabsContent>
+              )
+            })}
+          </Tabs>
         </div>
       </section>
 
@@ -218,15 +442,16 @@ export default function ProductsPage() {
               Engineering & Technical Innovation
             </h2>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Our technical envelope is backed by rigorous numerical modeling, including 1D thermodynamic 
-              mass-flow modeling, OpenFOAM v13 Computational Fluid Dynamics (CFD), and transient Finite 
-              Element Method (FEM) wall heat-loss simulations.
+              Our technical envelope is backed by rigorous numerical modeling,
+              including 1D thermodynamic mass-flow modeling, OpenFOAM v13
+              Computational Fluid Dynamics (CFD), and transient Finite Element
+              Method (FEM) wall heat-loss simulations.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             {specifications.map((spec, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-card rounded-xl p-6 border border-border hover:border-primary/30 transition-colors"
               >
@@ -235,9 +460,15 @@ export default function ProductsPage() {
                     <spec.icon className="w-6 h-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm text-muted-foreground mb-1">{spec.param}</p>
-                    <p className="text-xl font-bold text-foreground mb-2">{spec.spec}</p>
-                    <p className="text-sm text-muted-foreground">{spec.metric}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {spec.param}
+                    </p>
+                    <p className="text-xl font-bold text-foreground mb-2">
+                      {spec.spec}
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {spec.metric}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -254,21 +485,26 @@ export default function ProductsPage() {
               Multi-Revenue Stream Architecture
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Scaled commercial viability across multiple service offerings to meet your institution&apos;s needs.
+              Scaled commercial viability across multiple service offerings to
+              meet your institution&apos;s needs.
             </p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-card rounded-2xl p-6 border border-border hover:border-primary/30 hover:shadow-lg transition-all"
               >
                 <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
                   <service.icon className="w-6 h-6 text-primary" />
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">{service.title}</h3>
-                <p className="text-sm text-muted-foreground">{service.description}</p>
+                <h3 className="font-semibold text-foreground mb-2">
+                  {service.title}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  {service.description}
+                </p>
               </div>
             ))}
           </div>
@@ -282,7 +518,8 @@ export default function ProductsPage() {
             Ready to Get Started?
           </h2>
           <p className="text-primary-foreground/80 text-lg mb-8">
-            Contact us today to discuss your waste management needs and receive a customized solution proposal.
+            Contact us today to discuss your waste management needs and receive
+            a customized solution proposal.
           </p>
           <Button asChild size="lg" variant="secondary" className="gap-2">
             <Link href="/contact">

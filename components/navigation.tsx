@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Menu, X, Leaf } from "lucide-react"
-import { usePathname } from "next/navigation"
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -12,11 +13,11 @@ const navLinks = [
   { href: "/products", label: "Products & Services" },
   { href: "/team", label: "Team" },
   { href: "/contact", label: "Contact" },
-]
+];
 
 export function Navigation() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -24,12 +25,22 @@ export function Navigation() {
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform">
-              <Leaf className="w-5 h-5 text-primary-foreground" />
+            <div className="relative w-14 h-14  shrink-0 group-hover:scale-105 transition-transform">
+              <Image
+                src="/images/WIKI%20CLUB%20LOGO%20(5).png"
+                alt="Mencine logo"
+                fill
+                priority
+                className="object-contain scale-[2.5] -translate-y-5"
+              />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg font-bold tracking-tight text-foreground">MENCINE</span>
-              <span className="text-[10px] text-muted-foreground tracking-widest uppercase">CO LTD</span>
+              <span className="text-lg font-bold tracking-tight text-foreground">
+                MENCINE
+              </span>
+              <span className="text-[10px] text-muted-foreground tracking-widest uppercase">
+                CO LTD
+              </span>
             </div>
           </Link>
 
@@ -52,7 +63,10 @@ export function Navigation() {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
-            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button
+              asChild
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
+            >
               <Link href="/contact">Get in Touch</Link>
             </Button>
           </div>
@@ -86,7 +100,10 @@ export function Navigation() {
                 </Link>
               ))}
               <div className="pt-4 px-4">
-                <Button asChild className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                <Button
+                  asChild
+                  className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                >
                   <Link href="/contact">Get in Touch</Link>
                 </Button>
               </div>
@@ -95,5 +112,5 @@ export function Navigation() {
         )}
       </div>
     </header>
-  )
+  );
 }
