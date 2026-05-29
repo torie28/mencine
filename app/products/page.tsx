@@ -125,7 +125,7 @@ const wasteCategories = [
     fit: "Ideal for schools, office compounds, estates, hospitality facilities, and light industrial environments.",
     note: "For best performance, waste should be sorted to remove metals, glass, and heavily wet non-combustibles.",
     productImage: "/images/I8-140-agricultural-incinerator.webp",
-    productTitle: "G-Series: General Waste System",
+    productTitle: "I8-140: General Waste System",
     productDescription:
       "A specialized compact incinerator optimized for high-volume reduction of non-infectious municipal and facility waste streams.",
   },
@@ -164,8 +164,8 @@ const wasteCategories = [
     ],
     fit: "Relevant for industrial sites, sanitation programs, hospitals, specialized treatment facilities, and institutions seeking improved pollution control for difficult waste streams.",
     note: "This category is especially useful where open dumping or open burning of sanitary waste such as diapers and menstrual pads creates odor, smoke, and pollution-control concerns. Hazardous waste compatibility should still be reviewed case-by-case for regulatory compliance.",
-    productImage: "/images/industrial-garbage-incinerator.webp",
-    productTitle: "H-Series: Pollution Control System",
+    productImage: "/images/I8-55A-1-ANI.webp",
+    productTitle: "I8-55A-1-ANI: Pollution Control System",
     productDescription:
       "Advanced thermal treatment designed for difficult sanitary waste and contaminated disposables with rigorous emission management.",
   },
