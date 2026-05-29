@@ -61,7 +61,7 @@ export function HeroSection() {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-6 pt-8 border-t border-border">
+            {/*<div className="flex flex-wrap items-center gap-6 pt-8 border-t border-border">
               <div className="flex items-center gap-2">
                 <div className="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center">
                   <svg className="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="currentColor">
@@ -84,7 +84,7 @@ export function HeroSection() {
                   <p className="text-xs text-muted-foreground">2023 Winner</p>
                 </div>
               </div>
-            </div>
+            </div>*/}
           </div>
 
           {/* Image */}
