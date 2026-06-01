@@ -141,8 +141,15 @@ export function RequestQuoteDialog() {
     console.log("Submitting Request Quote:", dataToSend);
 
     try {
+      // Resolve endpoint: when NEXT_PUBLIC_BACKEND_URL is set, use it
+      // (useful for production where backend runs on a different host).
+      const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+      const endpoint = backendBase
+        ? `${backendBase.replace(/\/+$/g, "")}/api/request-quote`
+        : "/api/request-quote";
+
       // Submit to the backend API
-      const response = await fetch("/api/request-quote", {
+      const response = await fetch(endpoint, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
