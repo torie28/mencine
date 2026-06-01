@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Send } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -121,14 +122,57 @@ export function RequestQuoteDialog() {
 
   const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
-    console.log("Form values:", values);
 
-    // Placeholder submission to match the current contact page behavior.
-    // Replace with real API/email handling when you're ready.
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    // Prepare the data with labels instead of values for better readability in the email
+    const dataToSend = {
+      ...values,
+      selectedWaste: recommendationSummary.wasteLabel,
+      operationSize: recommendationSummary.sizeLabel,
+      submission_date: new Date().toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+    };
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    console.log("Submitting Request Quote:", dataToSend);
+
+    try {
+      // Submit to the backend API
+      const response = await fetch("/api/request-quote", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        const errorMsg =
+          result?.message ||
+          result?.error ||
+          `Server error: ${response.status} ${response.statusText}`;
+        throw new Error(errorMsg);
+      }
+
+      setIsSubmitted(true);
+      toast.success("Inquiry submitted successfully!");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
