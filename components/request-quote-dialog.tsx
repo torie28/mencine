@@ -1,7 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Send } from "lucide-react";
+import { useMemo, useState, useEffect } from "react";
+import { ArrowLeft, ArrowRight, Send, CheckCircle2 } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -63,6 +63,26 @@ export function RequestQuoteDialog() {
   const [operationSize, setOperationSize] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+  // Automatically close dialog after success
+  useEffect(() => {
+    if (isSubmitted) {
+      const timer = setTimeout(() => {
+        setIsClosing(true);
+        setTimeout(() => {
+          setOpen(false);
+          // Small delay to reset state after animation completes
+          setTimeout(() => {
+            resetDialog();
+            setIsClosing(false);
+          }, 300);
+        }, 500); // Animation duration
+      }, 4000); // How long the success message stays
+
+      return () => clearTimeout(timer);
+    }
+  }, [isSubmitted]);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -196,36 +216,46 @@ export function RequestQuoteDialog() {
 
       <DialogContent
         showCloseButton={false}
-        className="
+        className={`
           top-auto bottom-3 left-1/2 w-[calc(90%-1rem)] max-w-none
           translate-x-[-50%] translate-y-0
           max-h-[calc(100vh-1.5rem)] overflow-y-auto
           rounded-[28px] border-border p-0 shadow-2xl
           sm:top-[50%] sm:bottom-auto sm:w-full sm:max-w-[560px]
           sm:translate-x-[-50%] sm:translate-y-[-50%] sm:overflow-hidden
-        "
+          transition-all duration-500 ease-in-out
+          ${isClosing ? "opacity-0 scale-95 translate-y-4 sm:translate-y-[-45%]" : "opacity-100 scale-100"}
+        `}
       >
         <div className="p-5 sm:p-6">
           {isSubmitted ? (
-            <div className="py-6 text-center">
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10">
-                <Send className="h-7 w-7 text-primary" />
+            <div className="py-8 text-center animate-in fade-in zoom-in duration-500">
+              <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary/10 animate-bounce">
+                <CheckCircle2 className="h-10 w-10 text-primary" />
               </div>
 
-              <h3 className="font-display text-2xl font-bold text-foreground">
+              <h3 className="font-display text-3xl font-bold text-foreground">
                 Request received
               </h3>
 
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-4 text-base text-muted-foreground max-w-[300px] mx-auto">
                 Thanks. Our team will review your waste profile and reach out
                 with the right recommendation.
               </p>
 
+              <div className="mt-8 flex justify-center">
+                <div className="flex items-center gap-2 text-sm text-primary font-medium animate-pulse">
+                  <div className="h-2 w-2 rounded-full bg-primary" />
+                  Processing your inquiry...
+                </div>
+              </div>
+
               <Button
-                className="mt-6 h-11 w-full rounded-xl"
+                variant="ghost"
+                className="mt-6 text-muted-foreground hover:text-foreground"
                 onClick={() => handleOpenChange(false)}
               >
-                Close
+                Close Now
               </Button>
             </div>
           ) : (
