@@ -31,7 +31,7 @@ class ContactController extends Controller
         try {
             // Send email notification to the company
             Mail::send('Contact.company', ['data' => $data], function ($message) use ($data) {
-                $message->to('mencinecoltd@gmail.com')
+                $message->to('pastoriejoe18@gmail.com')
                     ->subject('New Contact Message: ' . $data['subject']);
             });
 

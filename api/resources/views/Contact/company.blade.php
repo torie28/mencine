@@ -26,7 +26,6 @@
         <!-- Customer information section with heading -->
         <h2 style="color: #1A2942; margin-top: 25px; margin-bottom: 15px; font-size: 18px;">Customer Information</h2>
         <!-- Tabular data with styling for organized presentation of customer details -->
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: Organized table of submitted information for easy reference -->
         <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
             <tr>
                 <th style="padding: 10px; text-align: left; background-color: #f5f5f5; border: 1px solid #ddd; font-weight: bold;">Full Name</th>
