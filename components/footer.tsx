@@ -15,13 +15,13 @@ const footerLinks = {
     { href: "/products#services", label: "Services" },
     { href: "/products#consulting", label: "Consulting" },
   ],
-  sdgs: [
-    { label: "SDG 3: Good Health" },
-    { label: "SDG 4: Quality Education" },
-    { label: "SDG 5: Gender Equality" },
-    { label: "SDG 6: Clean Water & Sanitation" },
-    { label: "SDG 13: Climate Action" },
-  ],
+  // sdgs: [
+  //   { label: "SDG 3: Good Health" },
+  //   { label: "SDG 4: Quality Education" },
+  //   { label: "SDG 5: Gender Equality" },
+  //   { label: "SDG 6: Clean Water & Sanitation" },
+  //   { label: "SDG 13: Climate Action" },
+  // ],
 };
 
 export function Footer() {
@@ -157,7 +157,7 @@ export function Footer() {
               </Link>
               <Link
                 href="/about"
-                className="hover:text-background transition-colors"
+                className="hover:text-background transition-colors" 
               >
                 Learn More
               </Link>
