@@ -1,10 +1,14 @@
-"use client"
+"use client";
 
-import { useMemo, useState } from "react"
-import { ArrowLeft, ArrowRight, Send } from "lucide-react"
+import { useMemo, useState } from "react";
+import { ArrowLeft, ArrowRight, Send } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { toast } from "sonner";
 
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -12,92 +16,171 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 
 const wasteOptions = [
   { value: "general-industrial", label: "General / industrial waste" },
   { value: "medical", label: "Medical waste" },
   { value: "hazardous", label: "Hazardous waste" },
   // { value: "site", label: "Site waste" },
-]
+];
 
 const operationOptions = [
-  { value: "small", label: "Small (<50 people)" },
-  { value: "medium", label: "Medium (50-200)" },
-  { value: "large", label: "Large (200-500)" },
-  { value: "major", label: "Major (500+)" },
-]
+  { value: "small", label: "Small (<2kg)" },
+  { value: "medium", label: "Medium (50-200kg)" },
+  { value: "large", label: "Large (200-300kg)" },
+  // { value: "major", label: "Major (500+)" },
+];
 
-const initialFormState = {
-  firstName: "",
-  lastName: "",
-  phone: "",
-  email: "",
-  country: "",
-  details: "",
-}
+const formSchema = z.object({
+  selectedWaste: z.string().min(1, "Please select a waste type"),
+  operationSize: z.string().min(1, "Please select an operation size"),
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  phone: z.string().min(5, "Please enter a valid phone number"),
+  email: z.string().email("Please enter a valid email address"),
+  country: z.string().min(2, "Country is required"),
+  details: z.string().optional(),
+});
 
-type Step = 1 | 2 | 3
+type FormValues = z.infer<typeof formSchema>;
+
+type Step = 1 | 2 | 3;
 
 export function RequestQuoteDialog() {
-  const [open, setOpen] = useState(false)
-  const [step, setStep] = useState<Step>(1)
-  const [selectedWaste, setSelectedWaste] = useState("")
-  const [operationSize, setOperationSize] = useState("")
-  const [formState, setFormState] = useState(initialFormState)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [step, setStep] = useState<Step>(1);
+  const [selectedWaste, setSelectedWaste] = useState("");
+  const [operationSize, setOperationSize] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      selectedWaste: "",
+      operationSize: "",
+      firstName: "",
+      lastName: "",
+      phone: "",
+      email: "",
+      country: "",
+      details: "",
+    },
+  });
 
   const recommendationSummary = useMemo(() => {
     const wasteLabel =
-      wasteOptions.find((option) => option.value === selectedWaste)?.label || ""
-  
+      wasteOptions.find((option) => option.value === selectedWaste)?.label ||
+      "";
+
     const sizeLabel =
-      operationOptions.find((option) => option.value === operationSize)?.label ||
-      ""
-  
+      operationOptions.find((option) => option.value === operationSize)
+        ?.label || "";
+
     return {
       wasteLabel,
       sizeLabel,
-    }
-  }, [selectedWaste, operationSize])
-
+    };
+  }, [selectedWaste, operationSize]);
 
   const resetDialog = () => {
-    setStep(1)
-    setSelectedWaste("")
-    setOperationSize("")
-    setFormState(initialFormState)
-    setIsSubmitting(false)
-    setIsSubmitted(false)
-  }
+    setStep(1);
+    setSelectedWaste("");
+    setOperationSize("");
+    form.reset();
+    setIsSubmitting(false);
+    setIsSubmitted(false);
+  };
 
   const handleOpenChange = (nextOpen: boolean) => {
-    setOpen(nextOpen)
+    setOpen(nextOpen);
 
     if (!nextOpen) {
-      resetDialog()
+      resetDialog();
     }
-  }
+  };
 
   const selectWaste = (value: string) => {
-    setSelectedWaste(value)
-  }
+    setSelectedWaste(value);
+    form.setValue("selectedWaste", value, { shouldValidate: true });
+  };
 
+  const selectOperationSize = (value: string) => {
+    setOperationSize(value);
+    form.setValue("operationSize", value, { shouldValidate: true });
+  };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  const onSubmit = async (values: FormValues) => {
+    setIsSubmitting(true);
 
-    // Placeholder submission to match the current contact page behavior.
-    // Replace with real API/email handling when you're ready.
-    await new Promise((resolve) => setTimeout(resolve, 1200))
+    // Prepare the data with labels instead of values for better readability in the email
+    const dataToSend = {
+      ...values,
+      selectedWaste: recommendationSummary.wasteLabel,
+      operationSize: recommendationSummary.sizeLabel,
+      submission_date: new Date().toLocaleString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+    };
 
-    setIsSubmitting(false)
-    setIsSubmitted(true)
-  }
+    console.log("Submitting Request Quote:", dataToSend);
+
+    try {
+      // Resolve endpoint: when NEXT_PUBLIC_BACKEND_URL is set, use it
+      // (useful for production where backend runs on a different host).
+      const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "";
+      const endpoint = backendBase
+        ? `${backendBase.replace(/\/+$/g, "")}/api/request-quote`
+        : "/api/request-quote";
+
+      // Submit to the backend API
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(dataToSend),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok) {
+        const errorMsg =
+          result?.message ||
+          result?.error ||
+          `Server error: ${response.status} ${response.statusText}`;
+        throw new Error(errorMsg);
+      }
+
+      setIsSubmitted(true);
+      toast.success("Inquiry submitted successfully!");
+    } catch (error) {
+      console.error("Submission error:", error);
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
@@ -122,7 +205,6 @@ export function RequestQuoteDialog() {
           sm:translate-x-[-50%] sm:translate-y-[-50%] sm:overflow-hidden
         "
       >
-
         <div className="p-5 sm:p-6">
           {isSubmitted ? (
             <div className="py-6 text-center">
@@ -168,8 +250,8 @@ export function RequestQuoteDialog() {
 
                       <div className="space-y-3">
                         {wasteOptions.map((option) => {
-                          const checked = selectedWaste === option.value
-                      
+                          const checked = selectedWaste === option.value;
+
                           return (
                             <div
                               key={option.value}
@@ -178,8 +260,8 @@ export function RequestQuoteDialog() {
                               onClick={() => selectWaste(option.value)}
                               onKeyDown={(e) => {
                                 if (e.key === "Enter" || e.key === " ") {
-                                  e.preventDefault()
-                                  selectWaste(option.value)
+                                  e.preventDefault();
+                                  selectWaste(option.value);
                                 }
                               }}
                               className={`flex w-full cursor-pointer items-center gap-3 rounded-2xl border px-4 py-4 text-left transition-colors ${
@@ -197,14 +279,13 @@ export function RequestQuoteDialog() {
                                 {option.label}
                               </span>
                             </div>
-                          )
+                          );
                         })}
                       </div>
                       <Button
                         className="mt-5 h-11 w-full rounded-xl font-semibold"
                         onClick={() => setStep(2)}
                         disabled={!selectedWaste}
-
                       >
                         Next
                         <ArrowRight className="h-4 w-4" />
@@ -215,23 +296,23 @@ export function RequestQuoteDialog() {
                   {step === 2 && (
                     <>
                       <p className="mb-3 text-sm font-semibold text-foreground">
-                        How large is your operation?
+                        How large is your operation per one cycle?
                       </p>
 
                       <div className="space-y-3">
                         {operationOptions.map((option) => {
-                          const checked = operationSize === option.value
-                      
+                          const checked = operationSize === option.value;
+
                           return (
                             <div
                               key={option.value}
                               role="button"
                               tabIndex={0}
-                              onClick={() => setOperationSize(option.value)}
+                              onClick={() => selectOperationSize(option.value)}
                               onKeyDown={(e) => {
                                 if (e.key === "Enter" || e.key === " ") {
-                                  e.preventDefault()
-                                  setOperationSize(option.value)
+                                  e.preventDefault();
+                                  selectOperationSize(option.value);
                                 }
                               }}
                               className={`flex w-full items-center gap-3 rounded-2xl border px-4 py-4 text-left transition-colors cursor-pointer ${
@@ -249,10 +330,9 @@ export function RequestQuoteDialog() {
                                 {option.label}
                               </span>
                             </div>
-                          )
+                          );
                         })}
                       </div>
-
 
                       <div className="mt-5 grid grid-cols-[1fr_1.8fr] gap-3">
                         <Button
@@ -291,108 +371,127 @@ export function RequestQuoteDialog() {
                     </DialogDescription>
                   </DialogHeader>
 
-                  <form onSubmit={handleSubmit} className="space-y-3">
-                    <input
-                      type="hidden"
-                      name="selectedWaste"
-                      value={recommendationSummary.wasteLabel}
-                    />
-                    <input
-                      type="hidden"
-                      name="operationSize"
-                      value={recommendationSummary.sizeLabel}
-                    />
-
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      <Input
-                        required
-                        placeholder="First Name"
-                        className="h-11 rounded-xl"
-                        value={formState.firstName}
-                        onChange={(e) =>
-                          setFormState({
-                            ...formState,
-                            firstName: e.target.value,
-                          })
-                        }
-                      />
-                      <Input
-                        required
-                        placeholder="Last Name"
-                        className="h-11 rounded-xl"
-                        value={formState.lastName}
-                        onChange={(e) =>
-                          setFormState({
-                            ...formState,
-                            lastName: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                      <Input
-                        required
-                        type="tel"
-                        placeholder="WhatsApp or Phone Number"
-                        className="h-11 rounded-xl"
-                        value={formState.phone}
-                        onChange={(e) =>
-                          setFormState({
-                            ...formState,
-                            phone: e.target.value,
-                          })
-                        }
-                      />
-                      <Input
-                        required
-                        type="email"
-                        placeholder="Email Address"
-                        className="h-11 rounded-xl"
-                        value={formState.email}
-                        onChange={(e) =>
-                          setFormState({
-                            ...formState,
-                            email: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-
-                    <Input
-                      required
-                      placeholder="Country"
-                      className="h-11 rounded-xl"
-                      value={formState.country}
-                      onChange={(e) =>
-                        setFormState({
-                          ...formState,
-                          country: e.target.value,
-                        })
-                      }
-                    />
-
-                    <Textarea
-                      rows={4}
-                      placeholder="Anything we should know about your waste challenges? (Optional)"
-                      className="min-h-[120px] rounded-xl"
-                      value={formState.details}
-                      onChange={(e) =>
-                        setFormState({
-                          ...formState,
-                          details: e.target.value,
-                        })
-                      }
-                    />
-
-                    <Button
-                      type="submit"
-                      className="h-11 w-full rounded-xl font-semibold"
-                      disabled={isSubmitting}
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-3"
                     >
-                      {isSubmitting ? "Submitting..." : "Submit"}
-                    </Button>
-                  </form>
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <FormField
+                          control={form.control}
+                          name="firstName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  placeholder="First Name"
+                                  className="h-11 rounded-xl"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="lastName"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  placeholder="Last Name"
+                                  className="h-11 rounded-xl"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  type="tel"
+                                  placeholder="WhatsApp or Phone Number"
+                                  className="h-11 rounded-xl"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={form.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <Input
+                                  type="email"
+                                  placeholder="Email Address"
+                                  className="h-11 rounded-xl"
+                                  {...field}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <FormField
+                        control={form.control}
+                        name="country"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Input
+                                placeholder="Country"
+                                className="h-11 rounded-xl"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="details"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormControl>
+                              <Textarea
+                                rows={4}
+                                placeholder="Anything we should know about your waste challenges? (Optional)"
+                                className="min-h-[120px] rounded-xl"
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        className="h-11 w-full rounded-xl font-semibold"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Submitting..." : "Submit"}
+                      </Button>
+                    </form>
+                  </Form>
                 </>
               )}
             </>
@@ -400,5 +499,5 @@ export function RequestQuoteDialog() {
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

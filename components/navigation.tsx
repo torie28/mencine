@@ -27,11 +27,11 @@ export function Navigation() {
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative w-14 h-14  shrink-0 group-hover:scale-105 transition-transform">
               <Image
-                src="/images/WIKI%20CLUB%20LOGO%20(5).png"
+                src="/images/MENCINE.png"
                 alt="Mencine logo"
                 fill
-                priority
-                className="object-contain scale-[2.5] -translate-y-5"
+                loading="eager"
+                className="object-contain scale-[1.5] -translate-y-2"
               />
             </div>
             <div className="flex flex-col">

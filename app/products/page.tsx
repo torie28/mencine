@@ -1,10 +1,11 @@
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { RequestQuoteDialog } from "@/components/request-quote-dialog"
+import type { Metadata } from "next";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { RequestQuoteDialog } from "@/components/request-quote-dialog";
 import {
   Flame,
   Wind,
@@ -22,7 +23,13 @@ import {
   Trash2,
   HeartPulse,
   ShieldAlert,
-} from "lucide-react"
+} from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Our Products & Services",
+  description:
+    "Explore the Mencine Compact Dual-Chamber Diesel Incinerator and our environmental services for schools and hospitals.",
+};
 
 const specifications = [
   {
@@ -73,7 +80,7 @@ const specifications = [
     spec: "1.95m × 0.95m | 5.08m",
     metric: "Compact layout paired with a 3.5m insulated SS304 stack.",
   },
-]
+];
 
 const services = [
   {
@@ -100,7 +107,7 @@ const services = [
     description:
       "Expert waste stream consulting to help institutions develop comprehensive waste management strategies.",
   },
-]
+];
 
 const wasteCategories = [
   {
@@ -115,10 +122,12 @@ const wasteCategories = [
       "Food-contaminated disposables from facilities",
       "General sanitary and operational waste streams",
     ],
-    fit:
-      "Ideal for schools, office compounds, estates, hospitality facilities, and light industrial environments.",
-    note:
-      "For best performance, waste should be sorted to remove metals, glass, and heavily wet non-combustibles.",
+    fit: "Ideal for schools, office compounds, estates, hospitality facilities, and light industrial environments.",
+    note: "For best performance, waste should be sorted to remove metals, glass, and heavily wet non-combustibles.",
+    productImage: "/images/I8-140-agricultural-incinerator.webp",
+    productTitle: "I8-140: General Waste System",
+    productDescription:
+      "A specialized compact incinerator optimized for high-volume reduction of non-infectious municipal and facility waste streams.",
   },
   {
     value: "medical",
@@ -133,10 +142,12 @@ const wasteCategories = [
       "Pharmaceutical waste",
       "Clinical and ward disposables",
     ],
-    fit:
-      "Suitable for hospitals, clinics, laboratories, maternity centers, and other medical institutions.",
-    note:
-      "High-temperature dual-chamber combustion helps reduce smoke, odors, and pathogen risk during treatment of hospital and medical waste streams.",
+    fit: "Suitable for hospitals, clinics, laboratories, maternity centers, and other medical institutions.",
+    note: "High-temperature dual-chamber combustion helps reduce smoke, odors, and pathogen risk during treatment of hospital and medical waste streams.",
+    productImage: "/images/i8-M100-incinerator.webp",
+    productTitle: "M-Series: Medical Grade System",
+    productDescription:
+      "Engineered with enhanced secondary combustion to ensure complete destruction of bio-hazardous materials and pathogens.",
   },
   {
     value: "hazardous",
@@ -151,12 +162,14 @@ const wasteCategories = [
       "Commercial diapers and incontinence products",
       "Menstrual pads and related sanitary waste",
     ],
-    fit:
-      "Relevant for industrial sites, sanitation programs, hospitals, specialized treatment facilities, and institutions seeking improved pollution control for difficult waste streams.",
-    note:
-      "This category is especially useful where open dumping or open burning of sanitary waste such as diapers and menstrual pads creates odor, smoke, and pollution-control concerns. Hazardous waste compatibility should still be reviewed case-by-case for regulatory compliance.",
+    fit: "Relevant for industrial sites, sanitation programs, hospitals, specialized treatment facilities, and institutions seeking improved pollution control for difficult waste streams.",
+    note: "This category is especially useful where open dumping or open burning of sanitary waste such as diapers and menstrual pads creates odor, smoke, and pollution-control concerns. Hazardous waste compatibility should still be reviewed case-by-case for regulatory compliance.",
+    productImage: "/images/I8-55A-1-ANI.webp",
+    productTitle: "I8-55A-1-ANI: Pollution Control System",
+    productDescription:
+      "Advanced thermal treatment designed for difficult sanitary waste and contaminated disposables with rigorous emission management.",
   },
-]
+];
 
 export default function ProductsPage() {
   return (
@@ -203,9 +216,8 @@ export default function ProductsPage() {
               Product Capabilities
             </h2>
             <p className="text-muted-foreground max-w-3xl mx-auto">
-              Within a single 30-minute automated cycle, our incinerator
-              reduces up to 2.0 kg of solid waste into minimal, sterile, inert
-              ash.
+              Within a single 30-minute automated cycle, our incinerator reduces
+              up to 2.0 kg of solid waste into minimal, sterile, inert ash.
             </p>
           </div>
 
@@ -218,18 +230,20 @@ export default function ProductsPage() {
                 General & Hygiene Waste
               </h3>
               <p className="text-muted-foreground mb-4">
-                Everyday institutional and sanitary waste streams including
-                commercial menstrual pads, baby diapers, and similar combustible
-                hygiene waste.
+                General waste significantly accelerates environmental pollution
+                when it is not properly managed, as it directly clogs ecosystems
+                and releases toxic substances into nature. Because general waste
+                consists of non-recyclable materials, it is typically buried in
+                landfills or burned in incinerators.
               </p>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Sanitary towels and menstrual pads
+                  Food-contaminated packaging
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
-                  Baby diapers and incontinence products
+                  Used paper towels
                 </li>
                 <li className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 bg-primary rounded-full" />
@@ -238,7 +252,10 @@ export default function ProductsPage() {
               </ul>
             </div>
 
-            <div className="bg-card rounded-2xl p-8 border border-border" id="medical">
+            <div
+              className="bg-card rounded-2xl p-8 border border-border"
+              id="medical"
+            >
               <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
                 <CheckCircle className="w-7 h-7 text-primary" />
               </div>
@@ -297,7 +314,6 @@ export default function ProductsPage() {
         </div>
       </section>
 
-
       {/* Browse by Waste Category */}
       <section className="py-20 bg-secondary/20" id="categories">
         <div className="max-w-7xl mx-auto px-6">
@@ -316,7 +332,7 @@ export default function ProductsPage() {
             <div className="flex justify-center">
               <TabsList className="h-auto w-full max-w-3xl flex-col gap-2 rounded-2xl bg-muted/80 p-2 sm:grid sm:grid-cols-3">
                 {wasteCategories.map((category) => {
-                  const Icon = category.icon
+                  const Icon = category.icon;
 
                   return (
                     <TabsTrigger
@@ -327,13 +343,13 @@ export default function ProductsPage() {
                       <Icon className="w-4 h-4" />
                       {category.label}
                     </TabsTrigger>
-                  )
+                  );
                 })}
               </TabsList>
             </div>
 
             {wasteCategories.map((category) => {
-              const Icon = category.icon
+              const Icon = category.icon;
 
               return (
                 <TabsContent key={category.value} value={category.value}>
@@ -396,12 +412,12 @@ export default function ProductsPage() {
                     </div>
 
                     <div className="bg-card rounded-2xl border border-border overflow-hidden">
-                      <div className="relative aspect-[4/3]">
+                      <div className="relative aspect-[4/3] bg-muted/30">
                         <Image
-                          src="/images/incinerator-product.jpg"
+                          src={category.productImage}
                           alt={`${category.label} incinerator application`}
                           fill
-                          className="object-cover"
+                          className="object-contain p-4"
                         />
                       </div>
 
@@ -410,12 +426,10 @@ export default function ProductsPage() {
                           Product View
                         </p>
                         <h4 className="font-display text-xl font-bold text-foreground mb-3">
-                          Compact Dual-Chamber Diesel Incinerator
+                          {category.productTitle}
                         </h4>
                         <p className="text-muted-foreground mb-6">
-                          A compact, high-temperature thermal destruction system
-                          that can be evaluated against your selected waste
-                          category and site operating requirements.
+                          {category.productDescription}
                         </p>
 
                         <Button asChild className="gap-2">
@@ -428,7 +442,7 @@ export default function ProductsPage() {
                     </div>
                   </div>
                 </TabsContent>
-              )
+              );
             })}
           </Tabs>
         </div>
@@ -532,5 +546,5 @@ export default function ProductsPage() {
 
       <Footer />
     </main>
-  )
+  );
 }

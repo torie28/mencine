@@ -1,6 +1,6 @@
-import Link from "next/link"
-import Image from "next/image"
-import { Mail, Phone, MapPin, Instagram, Linkedin } from "lucide-react"
+import Link from "next/link";
+import Image from "next/image";
+import { Mail, Phone, MapPin, Instagram, Linkedin } from "lucide-react";
 
 const footerLinks = {
   company: [
@@ -22,7 +22,7 @@ const footerLinks = {
     { label: "SDG 6: Clean Water & Sanitation" },
     { label: "SDG 13: Climate Action" },
   ],
-}
+};
 
 export function Footer() {
   return (
@@ -32,7 +32,7 @@ export function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-3 mb-6">
-                {/*<div className="relative w-50 h-40 shrink-0">
+              {/*<div className="relative w-50 h-40 shrink-0">
                   <Image
                     src="/images/WIKI%20CLUB%20LOGO%20(5).png"
                     alt="Mencine logo"
@@ -40,19 +40,28 @@ export function Footer() {
                     className="object-contain"
                   />
                 </div>*/}
-                <div className="flex flex-col mt-2">
-                  <span className="text-lg font-bold tracking-tight text-background">MENCINE CO LTD</span>
-                  </div>
+              <div className="flex flex-col mt-2">
+                <span className="text-lg font-bold tracking-tight text-background">
+                  MENCINE CO LTD
+                </span>
+              </div>
             </Link>
             <p className="text-background/70 text-sm leading-relaxed mb-6">
-              Award-winning Tanzanian environmental technology company pioneering smoke-free waste destruction infrastructure.
+              Award-winning Tanzanian environmental technology company
+              pioneering smoke-free waste destruction infrastructure.
             </p>
             <div className="flex flex-col gap-3 text-sm text-background/70">
-              <a href="tel:+255747105951" className="flex items-center gap-2 hover:text-background transition-colors">
+              <a
+                href="tel:+255747105951"
+                className="flex items-center gap-2 hover:text-background transition-colors"
+              >
                 <Phone className="w-4 h-4" />
                 +255 747 105 951
               </a>
-              <a href="mailto:mencinecoltd@gmail.com" className="flex items-center gap-2 hover:text-background transition-colors">
+              <a
+                href="mailto:mencinecoltd@gmail.com"
+                className="flex items-center gap-2 hover:text-background transition-colors"
+              >
                 <Mail className="w-4 h-4" />
                 mencinecoltd@gmail.com
               </a>
@@ -98,8 +107,10 @@ export function Footer() {
           </div>
 
           {/* SDG Alignment */}
-          <div>
-            <h4 className="font-semibold text-background mb-4">SDG Alignment</h4>
+          {/*<div>
+            <h4 className="font-semibold text-background mb-4">
+              SDG Alignment
+            </h4>
             <ul className="space-y-3">
               {footerLinks.sdgs.map((item) => (
                 <li key={item.label} className="text-sm text-background/70">
@@ -107,14 +118,15 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </div>*/}
         </div>
 
         {/* Bottom Bar */}
         <div className="mt-16 pt-8 border-t border-background/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-background/50">
-              &copy; {new Date().getFullYear()} Mencine Co Ltd. All rights reserved.
+              &copy; {new Date().getFullYear()} Mencine Co Ltd. All rights
+              reserved.
             </p>
             <div className="flex items-center gap-4">
               <a
@@ -136,13 +148,29 @@ export function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>
-            <p className="text-sm text-background/50">
-              BRELA Registered Entity | Tanzania
-            </p>
-
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-background/50">
+              <Link
+                href="/terms"
+                className="hover:text-background transition-colors"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/about"
+                className="hover:text-background transition-colors"
+              >
+                Learn More
+              </Link>
+              <Link
+                href="/privacy"
+                className="hover:text-background transition-colors"
+              >
+                Privacy & Cookie Notice
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

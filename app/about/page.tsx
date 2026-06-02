@@ -1,7 +1,13 @@
+import type { Metadata } from 'next'
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import Image from "next/image"
 import { Target, Leaf, Heart, Shield, Award, CheckCircle } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: 'About Us',
+  description: 'Learn about Mencine Co Ltd, our mission to redefine African institutional sanitation, and our award-winning environmental technology.',
+}
 
 export default function AboutPage() {
   return (

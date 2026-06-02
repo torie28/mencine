@@ -74,9 +74,10 @@ export function ImpactSection() {
           </div>
         </div>
 
+        
         {/* Impact Image */}
         <div className="relative rounded-2xl overflow-hidden mb-16">
-          <div className="aspect-[21/9] relative">
+          <div className="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] relative">
             <Image
               src="/images/impact.jpg"
               alt="Young African schoolgirls benefiting from improved sanitation"
@@ -85,12 +86,12 @@ export function ImpactSection() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/40 to-transparent" />
             <div className="absolute inset-0 flex items-center">
-              <div className="max-w-xl px-8 md:px-12">
-                <p className="text-sm font-semibold text-primary-foreground/80 uppercase tracking-wider mb-2">Our Impact</p>
-                <h3 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
+              <div className="max-w-xl px-4 sm:px-8 md:px-12">
+                <p className="text-xs sm:text-sm font-semibold text-primary-foreground/80 uppercase tracking-wider mb-1 sm:mb-2">Our Impact</p>
+                <h3 className="font-display text-lg sm:text-3xl md:text-4xl font-bold text-primary-foreground mb-2 sm:mb-4">
                   Upholding Human Dignity
                 </h3>
-                <p className="text-primary-foreground/80">
+                <p className="text-xs sm:text-sm md:text-base text-primary-foreground/80">
                   Product-market sweeps validated user patterns, safety comfort, and psychological impact 
                   with more than 2,000 young women in Mwanza regional secondary schools.
                 </p>
@@ -98,6 +99,7 @@ export function ImpactSection() {
             </div>
           </div>
         </div>
+
 
         {/* Target Markets */}
         <div className="text-center mb-12">
