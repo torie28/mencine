@@ -130,6 +130,23 @@ export function Footer() {
             </p>
             <div className="flex items-center gap-4">
               <a
+                href="https://wa.me/255747105951"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="text-background/50 hover:text-background transition-colors"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M17.472 14.382c-.301-.15-1.781-.878-2.057-.977-.276-.1-.476-.15-.676.15-.2.3-.772.977-.947 1.177-.175.2-.35.225-.65.075-.301-.15-1.27-.467-2.42-1.496-.895-.798-1.5-1.783-1.675-2.083-.175-.3-.018-.462.13-.61.135-.133.301-.35.451-.525.15-.175.2-.3.3-.5.1-.2.05-.375-.025-.525-.075-.15-.676-1.63-0.926-2.232-.243-.584-.49-.505-.676-.514-.175-.009-.376-.011-.576-.011-.2 0-.525.075-.8.375-.276.3-.1.75.1 1.05.2.3.576 1.128 1.128 1.63 1.258 1.128 2.503 1.725 4.393 2.476.502.2 1.058.147 1.558-.04 1.258-.467 2.058-1.128 2.058-1.128s.1-.175.1-.3c0-.125-.1-.225-.2-.375zM12.004 2C6.48 2 2 6.48 2 12c0 2.176.702 4.192 1.9 5.825l-1.35 4.925 5.05-1.325C9.202 22.482 10.565 23 12.004 23c5.524 0 10.004-4.48 10.004-10.004C22.008 6.48 17.528 2 12.004 2z" />
+                </svg>
+              </a>
+              <a
                 href="https://www.instagram.com/mencine_co_ltd/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -157,7 +174,7 @@ export function Footer() {
               </Link>
               <Link
                 href="/about"
-                className="hover:text-background transition-colors" 
+                className="hover:text-background transition-colors"
               >
                 Learn More
               </Link>

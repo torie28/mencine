@@ -8,31 +8,86 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function ContactPage() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     organization: "",
     phone: "",
+    // industry: "",
+    // source: "",
     subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // const industries = [
+  //   "Healthcare / Hospital",
+  //   "Education / School",
+  //   "Industrial / Manufacturing",
+  //   "Government / Municipality",
+  //   "Non-Profit / NGO",
+  //   "Other",
+  // ];
+
+  // const sources = [
+  //   "Google Search",
+  //   "Social Media",
+  //   "Referral",
+  //   "Exhibition / Event",
+  //   "Other",
+  // ];
+
+  const faqs = [
+    {
+      question: "Do you offer installation services?",
+      answer:
+        "Yes, we provide full installation, commissioning, and staff training for all our incinerator solutions across East Africa.",
+    },
+    {
+      question:
+        "Are your incinerators compliant with environmental regulations?",
+      answer:
+        "Absolutely. Our smoke-free technology is designed to meet and exceed local and international environmental standards, including NEMC guidelines in Tanzania.",
+    },
+    {
+      question: "What is the typical lead time for an order?",
+      answer:
+        "Lead times vary depending on the model and customization requirements, but generally range from 4 to 8 weeks from order confirmation.",
+    },
+    {
+      question: "Do you provide maintenance and spare parts?",
+      answer:
+        "Yes, we offer comprehensive annual maintenance contracts and keep a steady stock of critical spare parts to ensure minimal downtime.",
+    },
+  ];
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!executeRecaptcha) {
+      toast.error("reCAPTCHA not yet available");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
+      const recaptchaToken = await executeRecaptcha("contact_form");
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({
+          ...formState,
+          recaptchaToken,
+        }),
       });
 
       const result = await response.json().catch(() => ({}));
@@ -85,7 +140,7 @@ export default function ContactPage() {
             {/* Contact Info */}
             <div className="lg:col-span-1">
               <h2 className="font-display text-2xl font-bold text-foreground mb-8">
-                Contact Information
+                Get in Touch
               </h2>
 
               <div className="space-y-6">
@@ -94,14 +149,22 @@ export default function ContactPage() {
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">
-                      Hotline
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">
+                      Sales & Inquiries
                     </p>
                     <a
                       href="tel:+255747105951"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-lg font-semibold text-foreground hover:text-primary transition-colors block"
                     >
                       +255 747 105 951
+                    </a>
+                    <a
+                      href="https://wa.me/255747105951"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-medium text-primary hover:underline flex items-center gap-1 mt-1"
+                    >
+                      Chat on WhatsApp
                     </a>
                   </div>
                 </div>
@@ -111,10 +174,12 @@ export default function ContactPage() {
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">Email</p>
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">
+                      Technical Support
+                    </p>
                     <a
                       href="mailto:mencinecoltd@gmail.com"
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-foreground hover:text-primary transition-colors font-medium"
                     >
                       mencinecoltd@gmail.com
                     </a>
@@ -126,10 +191,15 @@ export default function ContactPage() {
                     <MapPin className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">
-                      Location
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">
+                      Headquarters
                     </p>
-                    <p className="text-muted-foreground">Mwanza, Tanzania</p>
+                    <p className="text-foreground font-medium">
+                      Mwanza, Tanzania
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      East Africa Region
+                    </p>
                   </div>
                 </div>
 
@@ -138,10 +208,10 @@ export default function ContactPage() {
                     <Clock className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground mb-1">
+                    <p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">
                       Business Hours
                     </p>
-                    <p className="text-muted-foreground">
+                    <p className="text-sm text-muted-foreground">
                       Monday - Friday: 8:00 AM - 5:00 PM
                       <br />
                       Saturday: 9:00 AM - 1:00 PM
@@ -150,15 +220,26 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              {/* Primary Contact */}
-              <div className="mt-10 p-6 bg-primary/5 rounded-2xl border border-primary/20">
-                <p className="text-sm text-muted-foreground mb-2">
-                  Primary Contact
+              {/* Trust Section */}
+              <div className="mt-12 pt-12 border-t border-border">
+                <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-6">
+                  Trusted by Institutions
                 </p>
-                <p className="font-semibold text-foreground text-lg">
-                  Ms. Tarsila Mellita
-                </p>
-                <p className="text-muted-foreground">Founder & CEO</p>
+                <div className="grid grid-cols-2 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                  {/* Placeholder for partner logos */}
+                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
+                    HEALTHCARE
+                  </div>
+                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
+                    GOVERNMENT
+                  </div>
+                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
+                    EDUCATION
+                  </div>
+                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
+                    INDUSTRIAL
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -276,6 +357,62 @@ export default function ContactPage() {
                       </div>
                     </div>
 
+                    {/*<div className="grid sm:grid-cols-2 gap-6">
+                      <div>
+                        <label
+                          htmlFor="industry"
+                          className="block text-sm font-medium text-foreground mb-2"
+                        >
+                          Industry *
+                        </label>
+                        <select
+                          id="industry"
+                          required
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          value={formState.industry}
+                          onChange={(e) =>
+                            setFormState({
+                              ...formState,
+                              industry: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="">Select an Industry</option>
+                          {industries.map((ind) => (
+                            <option key={ind} value={ind}>
+                              {ind}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label
+                          htmlFor="source"
+                          className="block text-sm font-medium text-foreground mb-2"
+                        >
+                          How did you hear about us?
+                        </label>
+                        <select
+                          id="source"
+                          className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          value={formState.source}
+                          onChange={(e) =>
+                            setFormState({
+                              ...formState,
+                              source: e.target.value,
+                            })
+                          }
+                        >
+                          <option value="">Select an Option</option>
+                          {sources.map((src) => (
+                            <option key={src} value={src}>
+                              {src}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>*/}
+
                     <div>
                       <label
                         htmlFor="subject"
@@ -345,25 +482,77 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Placeholder */}
-      <section className="py-20 bg-secondary/30">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* FAQ Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-              Our Location
+              Frequently Asked Questions
             </h2>
             <p className="text-muted-foreground">
-              Based in Mwanza, Tanzania - serving institutions across East
-              Africa
+              Find quick answers to common inquiries about our solutions.
             </p>
           </div>
-          <div className="aspect-[21/9] bg-muted rounded-2xl flex items-center justify-center border border-border">
-            <div className="text-center">
-              <MapPin className="w-12 h-12 text-primary mx-auto mb-4" />
-              <p className="text-lg font-semibold text-foreground">
-                Mwanza, Tanzania
-              </p>
-              <p className="text-muted-foreground">East Africa</p>
+          <div className="grid gap-6">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-card p-6 rounded-xl border border-border"
+              >
+                <h3 className="font-semibold text-foreground mb-2">
+                  {faq.question}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="bg-card border border-border rounded-3xl overflow-hidden">
+            <div className="grid lg:grid-cols-2">
+              <div className="p-12 flex flex-col justify-center">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 w-fit">
+                  <MapPin className="w-3 h-3" />
+                  Regional Presence
+                </div>
+                <h2 className="font-display text-3xl font-bold text-foreground mb-4">
+                  Visit Our Offices
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  Our headquarters are located in the vibrant city of Mwanza,
+                  positioned to serve all of Tanzania and neighboring East
+                  African countries efficiently.
+                </p>
+                <div className="space-y-4">
+                  <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
+                    <p className="font-semibold text-foreground">Main Office</p>
+                    <p className="text-sm text-muted-foreground">
+                      Mwanza, Tanzania
+                    </p>
+                  </div>
+                  <Button variant="outline" className="w-fit gap-2">
+                    Open in Google Maps
+                  </Button>
+                </div>
+              </div>
+              <div className="aspect-[4/3] lg:aspect-auto bg-muted relative min-h-[400px]">
+                {/* Real Google Map Embed would go here. Using a stylized placeholder for now. */}
+                <iframe
+                  title="Mwanza Map"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  style={{ border: 0 }}
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127568.2741513222!2d32.85196323604323!3d-2.5246733276856526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c48833989e2483%3A0x633190b9b3c58257!2sMwanza!5e0!3m2!1sen!2stz!4v1717320000000!5m2!1sen!2stz"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
           </div>
         </div>

@@ -38,7 +38,7 @@
         <p>Our team is reviewing your message and will respond as soon as possible, typically within 24-48 hours.</p>
 
         <!-- Alternative contact information for urgent inquiries -->
-        <p>If you have any urgent inquiries, please don't hesitate to call us at +255 747 105 951.</p>
+        <p>If you have any urgent inquiries, please don't hesitate to call or WhatsApp us at <a href="https://wa.me/255747105951" style="color: #E5B168; text-decoration: underline;">+255 747 105 951</a>.</p>
 
         <!-- Email signature with company branding -->
         <p>

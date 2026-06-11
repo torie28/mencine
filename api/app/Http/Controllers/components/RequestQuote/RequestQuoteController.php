@@ -5,9 +5,17 @@ namespace App\Http\Controllers\components\RequestQuote;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use App\Services\ReCaptchaService;
 
 class RequestQuoteController extends Controller
 {
+    protected $reCaptcha;
+
+    public function __construct(ReCaptchaService $reCaptcha)
+    {
+        $this->reCaptcha = $reCaptcha;
+    }
+
     /**
      * Handle the incoming request quote form submission.
      *
@@ -26,7 +34,18 @@ class RequestQuoteController extends Controller
             "operationSize" => "required|string",
             "details" => "nullable|string",
             "submission_date" => "required|string",
+            "recaptchaToken" => "required|string",
         ]);
+
+        if (!$this->reCaptcha->verify($data["recaptchaToken"])) {
+            return response()->json(
+                [
+                    "status" => "error",
+                    "message" => "reCAPTCHA verification failed.",
+                ],
+                400,
+            );
+        }
 
         try {
             // Send email notification to the company
