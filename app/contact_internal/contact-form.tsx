@@ -8,10 +8,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useOptionalReCaptcha } from "@/components/recaptcha-provider";
 
 export default function ContactPage() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const { executeRecaptcha } = useOptionalReCaptcha();
   const [formState, setFormState] = useState({
     name: "",
     email: "",

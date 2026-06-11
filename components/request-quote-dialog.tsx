@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+import { useOptionalReCaptcha } from "@/components/recaptcha-provider";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -58,7 +58,7 @@ type FormValues = z.infer<typeof formSchema>;
 type Step = 1 | 2 | 3;
 
 export function RequestQuoteDialog() {
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const { executeRecaptcha } = useOptionalReCaptcha();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>(1);
   const [selectedWaste, setSelectedWaste] = useState("");
