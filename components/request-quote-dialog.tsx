@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "sonner";
+import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -57,6 +58,7 @@ type FormValues = z.infer<typeof formSchema>;
 type Step = 1 | 2 | 3;
 
 export function RequestQuoteDialog() {
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const [open, setOpen] = useState(false);
   const [step, setStep] = useState<Step>(1);
   const [selectedWaste, setSelectedWaste] = useState("");
@@ -141,26 +143,34 @@ export function RequestQuoteDialog() {
   };
 
   const onSubmit = async (values: FormValues) => {
+    if (!executeRecaptcha) {
+      toast.error("reCAPTCHA not yet available");
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Prepare the data with labels instead of values for better readability in the email
-    const dataToSend = {
-      ...values,
-      selectedWaste: recommendationSummary.wasteLabel,
-      operationSize: recommendationSummary.sizeLabel,
-      submission_date: new Date().toLocaleString("en-GB", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      }),
-    };
-
-    console.log("Submitting Request Quote:", dataToSend);
-
     try {
+      const recaptchaToken = await executeRecaptcha("request_quote");
+
+      // Prepare the data with labels instead of values for better readability in the email
+      const dataToSend = {
+        ...values,
+        selectedWaste: recommendationSummary.wasteLabel,
+        operationSize: recommendationSummary.sizeLabel,
+        recaptchaToken,
+        submission_date: new Date().toLocaleString("en-GB", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true,
+        }),
+      };
+
+      console.log("Submitting Request Quote:", dataToSend);
+
       // Resolve endpoint: when NEXT_PUBLIC_BACKEND_URL is set, use it
       // (useful for production where backend runs on a different host).
       const backendBase = process.env.NEXT_PUBLIC_BACKEND_URL || "";

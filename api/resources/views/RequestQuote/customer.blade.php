@@ -78,7 +78,7 @@
         <p style="margin-top: 20px;">If you have any urgent questions or need immediate assistance, please feel free to contact us directly:</p>
         <ul style="margin-left: 20px; padding-left: 0;">
             <!-- Phone and email contacts with consistent formatting -->
-            <li style="margin-bottom: 5px;">Phone: +255 747 105 951</li>
+            <li style="margin-bottom: 5px;">Phone / WhatsApp: <a href="https://wa.me/255747105951" style="color: #E5B168; text-decoration: underline;">+255 747 105 951</a></li>
             <li style="margin-bottom: 5px;">Email: <a href="mailto:pastoriejoe18@gmail.com" style="color: #E5B168; text-decoration: underline;">mencinecoltd@gmail.com</a></li>
         </ul>
 

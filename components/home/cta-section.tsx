@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Phone, Mail } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Phone, Mail } from "lucide-react";
 
 export function CTASection() {
   return (
@@ -13,8 +13,9 @@ export function CTASection() {
               Ready to Transform Your Waste Management?
             </h2>
             <p className="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
-              Join the growing network of institutions across East Africa that trust Mencine for 
-              clean, efficient, and dignified waste disposal solutions.
+              Join the growing network of institutions across East Africa that
+              trust Mencine for clean, efficient, and dignified waste disposal
+              solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" variant="secondary" className="gap-2">
@@ -24,9 +25,7 @@ export function CTASection() {
                 </Link>
               </Button>
               <Button asChild size="lg" variant="secondary" className="gap-2">
-                <Link href="/products">
-                  View Products
-                </Link>
+                <Link href="/products">View Products</Link>
               </Button>
             </div>
           </div>
@@ -41,9 +40,22 @@ export function CTASection() {
                 </div>
                 <div>
                   <p className="text-sm text-primary-foreground/70">Hotline</p>
-                  <a href="tel:+255747105951" className="font-semibold hover:underline">
-                    +255 747 105 951
-                  </a>
+                  <div className="flex flex-col">
+                    <a
+                      href="tel:+255747105951"
+                      className="font-semibold hover:underline"
+                    >
+                      +255 747 105 951
+                    </a>
+                    <a
+                      href="https://wa.me/255747105951"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium hover:underline opacity-80"
+                    >
+                      Chat on WhatsApp
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -52,20 +64,27 @@ export function CTASection() {
                 </div>
                 <div>
                   <p className="text-sm text-primary-foreground/70">Email</p>
-                  <a href="mailto:mencinecoltd@gmail.com" className="font-semibold hover:underline">
+                  <a
+                    href="mailto:mencinecoltd@gmail.com"
+                    className="font-semibold hover:underline"
+                  >
                     mencinecoltd@gmail.com
                   </a>
                 </div>
               </div>
             </div>
             <div className="mt-8 pt-6 border-t border-primary-foreground/20">
-              <p className="text-sm text-primary-foreground/70">Primary Contact</p>
+              <p className="text-sm text-primary-foreground/70">
+                Primary Contact
+              </p>
               <p className="font-semibold">Ms. Tarsila Mellita</p>
-              <p className="text-sm text-primary-foreground/70">Founder & CEO</p>
+              <p className="text-sm text-primary-foreground/70">
+                Founder & CEO
+              </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

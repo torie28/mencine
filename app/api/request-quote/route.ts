@@ -1,9 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { verifyReCaptcha } from "@/lib/recaptcha";
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
+
+    // Verify reCAPTCHA
+    if (!data.recaptchaToken) {
+      return NextResponse.json(
+        { message: "reCAPTCHA token is missing" },
+        { status: 400 },
+      );
+    }
+
+    const isValid = await verifyReCaptcha(data.recaptchaToken);
+    if (!isValid) {
+      return NextResponse.json(
+        { message: "reCAPTCHA verification failed" },
+        { status: 400 },
+      );
+    }
 
     // Validate required fields
     const requiredFields = [

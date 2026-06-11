@@ -1,9 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { verifyReCaptcha } from "@/lib/recaptcha";
 
 export async function POST(request: NextRequest) {
   try {
     const data = await request.json();
+
+    // Verify reCAPTCHA
+    if (!data.recaptchaToken) {
+      return NextResponse.json(
+        { message: "reCAPTCHA token is missing" },
+        { status: 400 },
+      );
+    }
+
+    const isValid = await verifyReCaptcha(data.recaptchaToken);
+    if (!isValid) {
+      return NextResponse.json(
+        { message: "reCAPTCHA verification failed" },
+        { status: 400 },
+      );
+    }
 
     // Validate required fields
     if (!data.name || !data.email || !data.subject || !data.message) {
@@ -41,7 +58,7 @@ export async function POST(request: NextRequest) {
             .footer { background-color: #333; color: #fff; padding: 20px; text-align: center; font-size: 12px; }
             .info-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
             .info-table td { padding: 10px; border-bottom: 1px solid #eee; }
-            .info-label { font-weight: bold; color: #666; width: 30%; }
+            .info-label { font-weight: bold; color: #666; width: 40%; }
             .message-box { background-color: #f9f9f9; padding: 20px; border-radius: 5px; border-left: 4px solid #0066cc; margin-top: 20px; }
             .logo { max-width: 180px; margin-bottom: 15px; }
           </style>
@@ -57,7 +74,9 @@ export async function POST(request: NextRequest) {
                 <tr><td class="info-label">Name</td><td>${data.name}</td></tr>
                 <tr><td class="info-label">Email</td><td>${data.email}</td></tr>
                 <tr><td class="info-label">Organization</td><td>${data.organization || "N/A"}</td></tr>
+                <tr><td class="info-label">Industry</td><td>${data.industry || "N/A"}</td></tr>
                 <tr><td class="info-label">Phone</td><td>${data.phone || "N/A"}</td></tr>
+                <tr><td class="info-label">Heard From</td><td>${data.source || "N/A"}</td></tr>
                 <tr><td class="info-label">Subject</td><td>${data.subject}</td></tr>
               </table>
               <div class="message-box">

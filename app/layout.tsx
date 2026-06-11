@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/next";
+import { WhatsAppButton } from "@/components/whatsapp-button";
 import "./globals.css";
 
 const inter = Inter({
@@ -94,6 +95,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { ReCaptchaProvider } from "@/components/recaptcha-provider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -104,7 +107,8 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        {children}
+        <ReCaptchaProvider>{children}</ReCaptchaProvider>
+        <WhatsAppButton />
         <Toaster position="top-center" richColors />
         <Analytics />
       </body>
