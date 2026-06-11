@@ -68,15 +68,16 @@ export default function ContactPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!executeRecaptcha) {
-      toast.error("reCAPTCHA not yet available");
-      return;
-    }
 
     setIsSubmitting(true);
 
     try {
-      const recaptchaToken = await executeRecaptcha("contact_form");
+      let recaptchaToken = null;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha("contact_form");
+      } else {
+        console.warn("reCAPTCHA not available, submitting without token");
+      }
 
       const response = await fetch("/api/contact", {
         method: "POST",
