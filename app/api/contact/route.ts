@@ -7,19 +7,24 @@ export async function POST(request: NextRequest) {
     const data = await request.json();
 
     // Verify reCAPTCHA
-    if (!data.recaptchaToken) {
-      return NextResponse.json(
-        { message: "reCAPTCHA token is missing" },
-        { status: 400 },
-      );
-    }
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+    if (recaptchaSecretKey) {
+      if (!data.recaptchaToken) {
+        return NextResponse.json(
+          { message: "reCAPTCHA token is missing" },
+          { status: 400 },
+        );
+      }
 
-    const isValid = await verifyReCaptcha(data.recaptchaToken);
-    if (!isValid) {
-      return NextResponse.json(
-        { message: "reCAPTCHA verification failed" },
-        { status: 400 },
-      );
+      const isValid = await verifyReCaptcha(data.recaptchaToken);
+      if (!isValid) {
+        return NextResponse.json(
+          { message: "reCAPTCHA verification failed" },
+          { status: 400 },
+        );
+      }
+    } else {
+      console.warn("reCAPTCHA secret key is not set. Skipping verification.");
     }
 
     // Validate required fields

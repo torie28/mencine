@@ -143,15 +143,15 @@ export function RequestQuoteDialog() {
   };
 
   const onSubmit = async (values: FormValues) => {
-    if (!executeRecaptcha) {
-      toast.error("reCAPTCHA not yet available");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      const recaptchaToken = await executeRecaptcha("request_quote");
+      let recaptchaToken = null;
+      if (executeRecaptcha) {
+        recaptchaToken = await executeRecaptcha("request_quote");
+      } else {
+        console.warn("reCAPTCHA not available, submitting without token");
+      }
 
       // Prepare the data with labels instead of values for better readability in the email
       const dataToSend = {
