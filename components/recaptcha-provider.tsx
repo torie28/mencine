@@ -1,27 +1,61 @@
 "use client";
 
-import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
-import React from "react";
+import {
+  GoogleReCaptchaProvider,
+  useGoogleReCaptcha,
+} from "react-google-recaptcha-v3";
+import React, { createContext, useContext, useMemo } from "react";
+
+type RecaptchaContextType = {
+  executeRecaptcha:
+    | ReturnType<typeof useGoogleReCaptcha>["executeRecaptcha"]
+    | undefined;
+};
+
+const RecaptchaContext = createContext<RecaptchaContextType>({
+  executeRecaptcha: undefined,
+});
+
+function RecaptchaInternal({ children }: { children: React.ReactNode }) {
+  const { executeRecaptcha } = useGoogleReCaptcha();
+
+  const value = useMemo(
+    () => ({
+      executeRecaptcha,
+    }),
+    [executeRecaptcha],
+  );
+
+  return (
+    <RecaptchaContext.Provider value={value}>
+      {children}
+    </RecaptchaContext.Provider>
+  );
+}
 
 export function ReCaptchaProvider({ children }: { children: React.ReactNode }) {
   const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   if (!siteKey) {
-    console.warn("reCAPTCHA site key is not set. reCAPTCHA will be disabled.");
-    return <>{children}</>;
+    return (
+      <RecaptchaContext.Provider value={{ executeRecaptcha: undefined }}>
+        {children}
+      </RecaptchaContext.Provider>
+    );
   }
 
   return (
     <GoogleReCaptchaProvider
       reCaptchaKey={siteKey}
       scriptProps={{
-        async: false,
-        defer: false,
+        async: true,
+        defer: true,
         appendTo: "head",
-        nonce: undefined,
       }}
     >
-      {children}
+      <RecaptchaInternal>{children}</RecaptchaInternal>
     </GoogleReCaptchaProvider>
   );
 }
+
+export const useOptionalReCaptcha = () => useContext(RecaptchaContext);
