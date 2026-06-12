@@ -5,7 +5,17 @@ import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, Send } from "lucide-react";
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  Hospital,
+  Building2,
+  GraduationCap,
+  Factory,
+} from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useOptionalReCaptcha } from "@/components/recaptcha-provider";
@@ -226,20 +236,26 @@ export default function ContactPage() {
                 <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest mb-6">
                   Trusted by Institutions
                 </p>
-                <div className="grid grid-cols-2 gap-8 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                  {/* Placeholder for partner logos */}
-                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
-                    HEALTHCARE
-                  </div>
-                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
-                    GOVERNMENT
-                  </div>
-                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
-                    EDUCATION
-                  </div>
-                  <div className="h-12 bg-muted rounded flex items-center justify-center text-[10px] font-bold">
-                    INDUSTRIAL
-                  </div>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: Hospital, label: "Healthcare" },
+                    { icon: Building2, label: "Government" },
+                    { icon: GraduationCap, label: "Education" },
+                    { icon: Factory, label: "Industrial" },
+                  ].map((item, index) => {
+                    const Icon = item.icon;
+                    return (
+                      <div
+                        key={index}
+                        className="group flex flex-col items-center justify-center p-4 rounded-xl border border-border/50 bg-muted/30 hover:bg-background hover:border-primary/30 transition-all duration-300 hover:shadow-sm"
+                      >
+                        <Icon className="w-6 h-6 mb-2 text-muted-foreground group-hover:text-primary transition-colors duration-300" />
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground group-hover:text-foreground transition-colors duration-300">
+                          {item.label}
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
