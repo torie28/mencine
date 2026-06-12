@@ -166,6 +166,7 @@ export default function ContactPage() {
                     <a
                       href="tel:+255747105951"
                       className="text-lg font-semibold text-foreground hover:text-primary transition-colors block"
+                      aria-label="Call our sales team at +255 747 105 951"
                     >
                       +255 747 105 951
                     </a>
@@ -174,6 +175,7 @@ export default function ContactPage() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-sm font-medium text-primary hover:underline flex items-center gap-1 mt-1"
+                      aria-label="Chat with our sales team on WhatsApp"
                     >
                       Chat on WhatsApp
                     </a>
@@ -191,6 +193,7 @@ export default function ContactPage() {
                     <a
                       href="mailto:mencinecoltd@gmail.com"
                       className="text-foreground hover:text-primary transition-colors font-medium"
+                      aria-label="Email technical support at mencinecoltd@gmail.com"
                     >
                       mencinecoltd@gmail.com
                     </a>
@@ -285,6 +288,7 @@ export default function ContactPage() {
                     <Button
                       onClick={() => setIsSubmitted(false)}
                       variant="outline"
+                      aria-label="Send another message"
                     >
                       Send Another Message
                     </Button>
@@ -478,6 +482,7 @@ export default function ContactPage() {
                       size="lg"
                       className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
                       disabled={isSubmitting}
+                      aria-label="Send your message"
                     >
                       {isSubmitting ? (
                         <>
@@ -553,7 +558,11 @@ export default function ContactPage() {
                       Mwanza, Tanzania
                     </p>
                   </div>
-                  <Button variant="outline" className="w-fit gap-2">
+                  <Button
+                    variant="outline"
+                    className="w-fit gap-2"
+                    aria-label="Open our location in Google Maps"
+                  >
                     Open in Google Maps
                   </Button>
                 </div>

@@ -1,34 +1,41 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Play } from "lucide-react"
-import { useEffect, useState } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { ArrowRight, Play } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function HeroSection() {
-  const [isVisible, setIsVisible] = useState(false)
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true)
-  }, [])
+    setIsVisible(true);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center pt-20">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5" />
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-      }} />
+      <div
+        className="absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}
+      />
 
       <div className="relative max-w-7xl mx-auto px-6 py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Content */}
-          <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div
+            className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          >
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full mb-8">
               <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              <span className="text-sm font-medium text-primary">Award-Winning Innovation</span>
+              <span className="text-sm font-medium text-primary">
+                Award-Winning Innovation
+              </span>
             </div>
 
             {/* Headline */}
@@ -40,20 +47,28 @@ export function HeroSection() {
 
             {/* Description */}
             <p className="text-lg text-muted-foreground leading-relaxed mb-8 max-w-xl">
-              Pioneering decentralized thermal elimination infrastructure for hygiene products and bio-medical waste. 
-              Upholding human dignity while safeguarding ecosystems.
+              Pioneering decentralized thermal elimination infrastructure for
+              hygiene products and bio-medical waste. Upholding human dignity
+              while safeguarding ecosystems.
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2">
-                <Link href="/products">
+              <Button
+                asChild
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
+              >
+                <Link
+                  href="/products"
+                  aria-label="Explore our waste management solutions"
+                >
                   Explore Solutions
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="gap-2">
-                <Link href="/about">
+                <Link href="/about" aria-label="Learn more about our story">
                   <Play className="w-4 h-4" />
                   Learn Our Story
                 </Link>
@@ -88,7 +103,9 @@ export function HeroSection() {
           </div>
 
           {/* Image */}
-          <div className={`relative transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div
+            className={`relative transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+          >
             <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
               <Image
                 src="/images/incinerator-hero.jpg"
@@ -101,17 +118,23 @@ export function HeroSection() {
               <div className="absolute bottom-6 left-6 right-6 bg-background/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-semibold text-foreground">Compact Dual-Chamber</p>
-                    <p className="text-xs text-muted-foreground">Diesel Incinerator</p>
+                    <p className="text-sm font-semibold text-foreground">
+                      Compact Dual-Chamber
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Diesel Incinerator
+                    </p>
                   </div>
                   <div className="text-right">
                     <p className="text-2xl font-bold text-primary">875°C</p>
-                    <p className="text-xs text-muted-foreground">Operating Temp</p>
+                    <p className="text-xs text-muted-foreground">
+                      Operating Temp
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Floating Stats */}
             <div className="absolute -top-4 -right-4 bg-background rounded-xl shadow-lg p-4 hidden lg:block">
               <p className="text-3xl font-bold text-primary">2kg</p>
@@ -121,5 +144,5 @@ export function HeroSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -433,7 +433,10 @@ export default function ProductsPage() {
                         </p>
 
                         <Button asChild className="gap-2">
-                          <Link href="/contact">
+                          <Link
+                            href="/contact"
+                            aria-label={`Discuss ${category.label} waste category with our team`}
+                          >
                             Discuss This Category
                             <ArrowRight className="w-4 h-4" />
                           </Link>
@@ -536,7 +539,10 @@ export default function ProductsPage() {
             a customized solution proposal.
           </p>
           <Button asChild size="lg" variant="secondary" className="gap-2">
-            <Link href="/contact">
+            <Link
+              href="/contact"
+              aria-label="Contact our team for a consultation"
+            >
               Contact Our Team
               <ArrowRight className="w-4 h-4" />
             </Link>
