@@ -1,7 +1,5 @@
 "use client";
 
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -123,8 +121,6 @@ export default function ContactPage() {
 
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
-
       {/* Hero */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -583,8 +579,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

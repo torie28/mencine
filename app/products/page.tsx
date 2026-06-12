@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -174,8 +172,6 @@ const wasteCategories = [
 export default function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
-
       {/* Hero */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -549,8 +545,6 @@ export default function ProductsPage() {
           </Button>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }
