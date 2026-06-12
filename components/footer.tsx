@@ -31,7 +31,11 @@ export function Footer() {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-6">
+            <Link
+              href="/"
+              className="flex items-center gap-3 mb-6"
+              aria-label="Mencine Co Ltd - Home"
+            >
               {/*<div className="relative w-50 h-40 shrink-0">
                   <Image
                     src="/images/WIKI%20CLUB%20LOGO%20(5).png"
@@ -54,6 +58,7 @@ export function Footer() {
               <a
                 href="tel:+255747105951"
                 className="flex items-center gap-2 hover:text-background transition-colors"
+                aria-label="Call us at +255 747 105 951"
               >
                 <Phone className="w-4 h-4" />
                 +255 747 105 951
@@ -61,6 +66,7 @@ export function Footer() {
               <a
                 href="mailto:mencinecoltd@gmail.com"
                 className="flex items-center gap-2 hover:text-background transition-colors"
+                aria-label="Email us at mencinecoltd@gmail.com"
               >
                 <Mail className="w-4 h-4" />
                 mencinecoltd@gmail.com
@@ -81,6 +87,7 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className="text-sm text-background/70 hover:text-background transition-colors"
+                    aria-label={`Go to ${link.label} page`}
                   >
                     {link.label}
                   </Link>
@@ -98,6 +105,7 @@ export function Footer() {
                   <Link
                     href={link.href}
                     className="text-sm text-background/70 hover:text-background transition-colors"
+                    aria-label={`Go to ${link.label} section`}
                   >
                     {link.label}
                   </Link>
@@ -169,18 +177,21 @@ export function Footer() {
               <Link
                 href="/terms"
                 className="hover:text-background transition-colors"
+                aria-label="View Terms and Conditions"
               >
                 Terms
               </Link>
               <Link
                 href="/about"
                 className="hover:text-background transition-colors"
+                aria-label="Learn more about us"
               >
                 Learn More
               </Link>
               <Link
                 href="/privacy"
                 className="hover:text-background transition-colors"
+                aria-label="View Privacy and Cookie Notice"
               >
                 Privacy & Cookie Notice
               </Link>

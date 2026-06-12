@@ -176,7 +176,10 @@ export function SolutionPreview() {
               size="lg"
               className="bg-primary hover:bg-primary/90 text-primary-foreground gap-2"
             >
-              <Link href="/products">
+              <Link
+                href="/products"
+                aria-label="View full technical specifications of our incinerators"
+              >
                 View Full Specifications
                 <ArrowRight className="w-4 h-4" />
               </Link>

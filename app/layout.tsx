@@ -96,6 +96,8 @@ export const metadata: Metadata = {
 };
 
 import { ReCaptchaProvider } from "@/components/recaptcha-provider";
+import { Navigation } from "@/components/navigation";
+import { Footer } from "@/components/footer";
 
 export default function RootLayout({
   children,
@@ -107,7 +109,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
-        <ReCaptchaProvider>{children}</ReCaptchaProvider>
+        <ReCaptchaProvider>
+          <Navigation />
+          {children}
+          <Footer />
+        </ReCaptchaProvider>
         <WhatsAppButton />
         <Toaster position="top-center" richColors />
         <Analytics />

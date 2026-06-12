@@ -19,13 +19,15 @@ export function CTASection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" variant="secondary" className="gap-2">
-                <Link href="/contact">
+                <Link href="/contact" aria-label="Get in touch with us">
                   Get in Touch
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
               <Button asChild size="lg" variant="secondary" className="gap-2">
-                <Link href="/products">View Products</Link>
+                <Link href="/products" aria-label="View our range of products">
+                  View Products
+                </Link>
               </Button>
             </div>
           </div>
@@ -44,6 +46,7 @@ export function CTASection() {
                     <a
                       href="tel:+255747105951"
                       className="font-semibold hover:underline"
+                      aria-label="Call our hotline at +255 747 105 951"
                     >
                       +255 747 105 951
                     </a>
@@ -52,6 +55,7 @@ export function CTASection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-xs font-medium hover:underline opacity-80"
+                      aria-label="Chat with us on WhatsApp"
                     >
                       Chat on WhatsApp
                     </a>
@@ -67,6 +71,7 @@ export function CTASection() {
                   <a
                     href="mailto:mencinecoltd@gmail.com"
                     className="font-semibold hover:underline"
+                    aria-label="Email us at mencinecoltd@gmail.com"
                   >
                     mencinecoltd@gmail.com
                   </a>

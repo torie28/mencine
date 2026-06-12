@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Navigation } from "@/components/navigation";
-import { Footer } from "@/components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -174,8 +172,6 @@ const wasteCategories = [
 export default function ProductsPage() {
   return (
     <main className="min-h-screen bg-background">
-      <Navigation />
-
       {/* Hero */}
       <section className="pt-32 pb-20 bg-gradient-to-b from-primary/5 to-background">
         <div className="max-w-7xl mx-auto px-6">
@@ -433,7 +429,10 @@ export default function ProductsPage() {
                         </p>
 
                         <Button asChild className="gap-2">
-                          <Link href="/contact">
+                          <Link
+                            href="/contact"
+                            aria-label={`Discuss ${category.label} waste category with our team`}
+                          >
                             Discuss This Category
                             <ArrowRight className="w-4 h-4" />
                           </Link>
@@ -536,15 +535,16 @@ export default function ProductsPage() {
             a customized solution proposal.
           </p>
           <Button asChild size="lg" variant="secondary" className="gap-2">
-            <Link href="/contact">
+            <Link
+              href="/contact"
+              aria-label="Contact our team for a consultation"
+            >
               Contact Our Team
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
         </div>
       </section>
-
-      <Footer />
     </main>
   );
 }

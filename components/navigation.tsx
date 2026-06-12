@@ -58,7 +58,11 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-6">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link
+            href="/"
+            className="flex items-center gap-3 group"
+            aria-label="Mencine Co Ltd - Home"
+          >
             <div className="relative w-14 h-14  shrink-0 group-hover:scale-105 transition-transform">
               <Image
                 src="/images/MENCINE.png"
@@ -91,6 +95,7 @@ export function Navigation() {
                       ? "text-primary"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
+                  aria-label={`Go to ${link.label} page`}
                 >
                   {link.label}
                   <span
@@ -111,7 +116,9 @@ export function Navigation() {
               asChild
               className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
-              <Link href="/contact">Get in Touch</Link>
+              <Link href="/contact" aria-label="Get in touch with us">
+                Get in Touch
+              </Link>
             </Button>
           </div>
 
@@ -119,7 +126,7 @@ export function Navigation() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
+            aria-label={isOpen ? "Close menu" : "Open menu"}
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -141,6 +148,7 @@ export function Navigation() {
                         ? "text-primary"
                         : "text-muted-foreground hover:text-foreground"
                     }`}
+                    aria-label={`Go to ${link.label} page`}
                   >
                     <span
                       className={`absolute left-0 top-1/2 -translate-y-1/2 w-1 bg-primary transition-all duration-300 ${
@@ -156,7 +164,13 @@ export function Navigation() {
                   asChild
                   className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                 >
-                  <Link href="/contact">Get in Touch</Link>
+                  <Link
+                    href="/contact"
+                    onClick={() => setIsOpen(false)}
+                    aria-label="Get in touch with us"
+                  >
+                    Get in Touch
+                  </Link>
                 </Button>
               </div>
             </div>
