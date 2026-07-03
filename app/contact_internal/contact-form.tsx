@@ -529,56 +529,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="bg-card border border-border rounded-3xl overflow-hidden">
-            <div className="grid lg:grid-cols-2">
-              <div className="p-12 flex flex-col justify-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-6 w-fit">
-                  <MapPin className="w-3 h-3" />
-                  Regional Presence
-                </div>
-                <h2 className="font-display text-3xl font-bold text-foreground mb-4">
-                  Visit Our Offices
-                </h2>
-                <p className="text-muted-foreground mb-8">
-                  Our headquarters are located in the vibrant city of Mwanza,
-                  positioned to serve all of Tanzania and neighboring East
-                  African countries efficiently.
-                </p>
-                <div className="space-y-4">
-                  <div className="p-4 bg-muted/50 rounded-xl border border-border/50">
-                    <p className="font-semibold text-foreground">Main Office</p>
-                    <p className="text-sm text-muted-foreground">
-                      Mwanza, Tanzania
-                    </p>
-                  </div>
-                  <Button
-                    variant="outline"
-                    className="w-fit gap-2"
-                    aria-label="Open our location in Google Maps"
-                  >
-                    Open in Google Maps
-                  </Button>
-                </div>
-              </div>
-              <div className="aspect-[4/3] lg:aspect-auto bg-muted relative min-h-[400px]">
-                {/* Real Google Map Embed would go here. Using a stylized placeholder for now. */}
-                <iframe
-                  title="Mwanza Map"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{ border: 0 }}
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127568.2741513222!2d32.85196323604323!3d-2.5246733276856526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19c48833989e2483%3A0x633190b9b3c58257!2sMwanza!5e0!3m2!1sen!2stz!4v1717320000000!5m2!1sen!2stz"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+        {/* Map section removed */}
     </main>
   );
 }

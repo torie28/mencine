@@ -1,110 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Meta tags for proper document rendering and character encoding -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>New Incinerator Inquiry Received</title>
-    <!-- No separate style tags - all CSS is inlined for better email client compatibility -->
 </head>
-<!-- Base body styling for consistent appearance across email clients -->
-<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-    <!-- Header section with company branding and notification badge using company's light theme colors -->
-    <div style="background-color: #ffffff; color: #1A2942; padding: 15px; text-align: center; border-radius: 5px 5px 0 0;">
-        <!-- Company logo -->
-        <div style="margin-bottom: 10px;">
-            <img src="{{ $message->embed(base_path('../public/images/MENCINE.png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 180px; height: auto;">
+<body style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f7f9;">
+    <div style="background-color: #ffffff; padding: 0; border: 1px solid #e1e8ed; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+        <!-- Header with Logo and Badge -->
+        <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid #f0f4f8;">
+            <img src="{{ $message->embed(base_path('../public/images/MENCINE.png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 140px; height: auto; margin-bottom: 15px;">
+            <h1 style="margin: 0; color: #1A2942; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center;">
+                New Incinerator Inquiry
+                <span style="background-color: #E5B168; color: #ffffff; font-size: 12px; padding: 4px 10px; border-radius: 20px; margin-left: 10px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    {{ $status ?? 'New' }}
+                </span>
+            </h1>
         </div>
-        <!-- Title with attention-grabbing notification badge -->
-        <h1 style="margin: 0; font-size: 24px;">
-            New Incinerator Inquiry
-            <!-- Notification badge for visual emphasis of new inquiry -->
-            <span style="display: inline-block; background-color: #E5B168; color: #1A2942; padding: 3px 8px; border-radius: 10px; font-size: 12px; margin-left: 5px;">
-                New
-            </span>
-        </h1>
+
+        <!-- Alert Section -->
+        <div style="padding: 25px 35px;">
+            <div style="background-color: #FFF9EE; border-left: 4px solid #E5B168; padding: 15px 20px; margin-bottom: 30px; border-radius: 0 4px 4px 0;">
+                <p style="margin: 0; font-size: 15px; color: #856404;">
+                    <strong style="color: #1A2942;">Business Alert:</strong> A new incinerator inquiry has been submitted requiring prompt attention.
+                </p>
+            </div>
+
+            <!-- Customer Information -->
+            <h2 style="color: #1A2942; font-size: 20px; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #f0f4f8; padding-bottom: 8px;">Customer Information</h2>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096; width: 35%;">Name</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748; font-weight: bold;">{{ $data['firstName'] }} {{ $data['lastName'] }}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Email</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px;">
+                        <a href="mailto:{{ $data['email'] }}" style="color: #E5B168; text-decoration: underline;">{{ $data['email'] }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Phone</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748;">{{ !empty($data['phone']) ? $data['phone'] : 'Not provided' }}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Country</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748;">{{ $data['country'] }}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Waste Type</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748;">{{ $data['selectedWaste'] }}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Operation Size</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748;">{{ $data['operationSize'] }}</td>
+                </tr>
+                <tr>
+                    <th style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #718096;">Submission Date</th>
+                    <td style="padding: 12px 0; text-align: left; border-bottom: 1px solid #edf2f7; font-size: 14px; color: #2d3748;">{{ $data['submission_date'] }}</td>
+                </tr>
+            </table>
+
+            <!-- Additional Details -->
+            <h2 style="color: #1A2942; font-size: 20px; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #f0f4f8; padding-bottom: 8px;">Additional Details</h2>
+            <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; border-radius: 4px; margin-bottom: 30px;">
+                <p style="margin: 0; font-size: 14px; color: #4a5568; line-height: 1.5;">
+                    {{ !empty($data['details']) ? $data['details'] : 'No additional details provided.' }}
+                </p>
+            </div>
+
+            <!-- Recommended Actions -->
+            <h2 style="color: #1A2942; font-size: 20px; margin-top: 0; margin-bottom: 15px; border-bottom: 2px solid #f0f4f8; padding-bottom: 8px;">Recommended Actions</h2>
+            <p style="font-size: 14px; color: #4a5568; margin-bottom: 20px;">This inquiry should be responded to within 24 hours to maximize conversion opportunity.</p>
+
+            <div style="text-align: center; margin-bottom: 30px;">
+                <a href="mailto:{{ $data['email'] }}?subject=RE: Your Incinerator Inquiry - {{ $data['selectedWaste'] }}"
+                   style="display: inline-block; background-color: #1A2942; color: #ffffff; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; margin-right: 10px;">
+                    Reply to Customer
+                </a>
+                <a href="{{ $dashboardUrl ?? 'https://www.mencine.co.tz/dashboard' }}"
+                   style="display: inline-block; background-color: #E5B168; color: #1A2942; padding: 12px 25px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px;">
+                    View in Dashboard
+                </a>
+            </div>
+
+            <p style="font-size: 13px; color: #718096; font-style: italic; border-top: 1px solid #f0f4f8; padding-top: 15px;">
+                <strong>Marketing Notes:</strong> This inquiry came through the Mencine Co Ltd website incinerator inquiry form.
+            </p>
+        </div>
     </div>
 
-    <!-- Main content area with structured information about the inquiry -->
-    <div style="padding: 20px; border: 1px solid #ddd; border-top: none; border-radius: 0 0 5px 5px;">
-        <!-- Priority alert section with visual highlighting for urgent attention -->
-        <div style="background-color: #F9F5EA; border-left: 4px solid #E5B168; padding: 10px 15px; margin: 15px 0;">
-            <p style="margin: 5px 0;"><strong style="font-weight: bold;">Business Alert:</strong> A new incinerator inquiry has been submitted requiring prompt attention.</p>
-        </div>
-
-        <!-- Customer information section with heading -->
-        <h2 style="color: #1A2942; margin-top: 25px; margin-bottom: 15px; font-size: 20px;">Customer Information</h2>
-        <!-- Structured table for customer details with consistent styling -->
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; border: 1px solid #ddd;">
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Name</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ $data['firstName'] }} {{ $data['lastName'] }}</td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Email</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">
-                    <!-- Email link for quick response capability -->
-                    <a href="mailto:{{ $data['email'] }}" style="color: #E5B168; text-decoration: underline;">{{ $data['email'] }}</a>
-                </td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Phone</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ !empty($data['phone']) ? $data['phone'] : 'Not provided' }}</td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Country</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ $data['country'] }}</td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Waste Type</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ $data['selectedWaste'] }}</td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Operation Size</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ $data['operationSize'] }}</td>
-            </tr>
-            <tr>
-                <th style="padding: 10px; text-align: left; background-color: #f5f5f5; width: 30%; border: 1px solid #ddd; font-weight: bold;">Submission Date</th>
-                <td style="padding: 10px; text-align: left; border: 1px solid #ddd;">{{ $data['submission_date'] }}</td>
-            </tr>
-        </table>
-
-        <!-- Inquiry details section with customer's message -->
-        <h2 style="color: #1A2942; margin-top: 25px; margin-bottom: 15px; font-size: 20px;">Additional Details</h2>
-        <!-- Highlighted message box for the actual inquiry content -->
-        <div style="background-color: #F9F5EA; border-left: 3px solid #E5B168; padding: 15px; margin: 20px 0;">
-            <p style="margin: 5px 0;">{{ !empty($data['details']) ? $data['details'] : 'No additional details provided.' }}</p>
-        </div>
-
-        <!-- Action section with recommended next steps -->
-        <h2 style="color: #1A2942; margin-top: 25px; margin-bottom: 15px; font-size: 20px;">Recommended Actions</h2>
-        <p style="margin-bottom: 15px;">This inquiry should be responded to within 24 hours to maximize conversion opportunity.</p>
-
-        <!-- Action buttons for quick staff response options -->
-        <div style="margin-top: 20px; text-align: center;">
-            <!-- Reply button with pre-populated email subject -->
-            <a href="mailto:{{ $data['email'] }}?subject=RE: Your Incinerator Inquiry - {{ $data['selectedWaste'] }}"
-               style="background-color: #1A2942; color: white; padding: 10px 15px; text-decoration: none;
-                       border-radius: 4px; display: inline-block; margin-top: 15px; margin-right: 10px; font-weight: bold;">
-                Reply to Customer
-            </a>
-            <!-- Dashboard link for more comprehensive inquiry management -->
-            <a href="https://mencine.co.tz/dashboard"
-               style="background-color: #E5B168; color: #1A2942; padding: 10px 15px; text-decoration: none;
-                       border-radius: 4px; display: inline-block; margin-top: 15px; margin-right: 10px; font-weight: bold;">
-                View in Dashboard
-            </a>
-        </div>
-
-        <!-- Marketing context information for better lead understanding -->
-        <p style="margin-top: 30px;">
-            <strong style="font-weight: bold;">Marketing Notes:</strong> This inquiry came through the Mencine Co Ltd website incinerator inquiry form.
-        </p>
-    </div>
-
-    <!-- Footer with copyright information and system notification identification -->
-    <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #777;">
-        <p style="margin: 5px 0;">© {{ date('Y') }} Mencine Co Ltd. Internal notification system.</p>
+    <!-- Footer -->
+    <div style="text-align: center; padding: 20px; font-size: 12px; color: #9ca3af;">
+        <p style="margin: 5px 0;">&copy; {{ date('Y') }} Mencine Co Ltd. Internal notification system.</p>
         <p style="margin: 5px 0;">This is an automated message from your website inquiry system.</p>
     </div>
 </body>

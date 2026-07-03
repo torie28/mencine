@@ -159,14 +159,16 @@ export function RequestQuoteDialog() {
         selectedWaste: recommendationSummary.wasteLabel,
         operationSize: recommendationSummary.sizeLabel,
         recaptchaToken,
-        submission_date: new Date().toLocaleString("en-GB", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        }),
+        submission_date: new Date()
+          .toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          })
+          .replace(",", " at"),
       };
 
       console.log("Submitting Request Quote:", dataToSend);
