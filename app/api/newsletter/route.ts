@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const logoUrl = "https://mencine.vercel.app/images/MENCINE.png";
+    const logoUrl = "https://mencine.vercel.app/images/WIKI%20CLUB%20LOGO%20(5).png";
 
     // 1. Company Notification Email
     const companyMailOptions = {
