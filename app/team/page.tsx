@@ -10,46 +10,25 @@ export const metadata: Metadata = {
 
 const teamMembers = [
   {
-    name: "Ms. Tarsila Mellita",
-    role: "Founder, CEO & Business Developer",
+    name: "Ms. Tarsila Faustin Mellita",
+    role: "Founder & CEO",
     image: "/images/team-tarsila.jpg",
     description:
-      "Directs commercial growth, ecosystem partnerships, and institutional strategic alignment.",
+      "Social entrepreneur, environmental advocate, and Founder & CEO of Mencine Co. LTD. With over six years of experience in climate action and a background in Economics, she drives sustainable menstrual waste management. Tarsila leads the development of eco-friendly incineration solutions, fostering gender equality and cleaner communities across East Africa.",
   },
   {
-    name: "Mr. Donald Dominic",
+    name: "Mr. Harold Nakembetwa",
     role: "Lead Mechanical Expert",
     image: "/images/team-donald.jpg",
     description:
-      "Translates thermodynamic simulations and SolidWorks designs into physical prototypes.",
+      "Translates complex thermodynamic simulations and SolidWorks designs into physical prototypes, heading mechanical engineering efforts to ensure high-performance, durable, and environmentally clean incineration systems.",
   },
   {
-    name: "Mr. Robert Chacha",
-    role: "Electrical Expert",
-    image: "/images/team-robert.jpg",
-    description:
-      "Engineers smart automation systems, safety interlocks, and digital blower controls.",
-  },
-  {
-    name: "Ms. Noela Ngowi",
-    role: "Operations Manager",
+    name: "Ms. Rosemary Haule",
+    role: "Chief Operating Officer (COO)",
     image: "/images/team-noela.jpg",
     description:
-      "Manages internal workflow coordination, project delivery timelines, and logistics.",
-  },
-  {
-    name: "Ms. Francine Gasper",
-    role: "Safety & Sustainability Specialist",
-    image: "/images/team-francine.jpg",
-    description:
-      "Ensures regulatory emission alignment and quantified environmental health targets.",
-  },
-  {
-    name: "Mr. Wilson Mabala",
-    role: "Project Corporate Advisor",
-    image: "/images/team-wilson.jpg",
-    description:
-      "Provides guidance on industrial corporate governance and scalable business execution.",
+      "Biomedical Engineer and Chief Operating Officer (COO) at Mencine Company. She directs day-to-day operations and program execution, utilizing her analytical background and structured, problem-solving approach to bridge the gap between technical development and executive business strategy.",
   },
 ];
 
@@ -78,76 +57,67 @@ export default function TeamPage() {
       {/* Team Grid */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                className="bg-card rounded-2xl overflow-hidden border border-border hover:border-primary/30 hover:shadow-xl transition-all group"
-              >
-                {/* Image */}
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Image
-                    src={member.image}
-                    alt={member.name}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="flex flex-col gap-16">
+            {teamMembers.map((member, idx) => {
+              const isCenter = idx === 0 || idx === 2;
+              const isLeft = idx === 1;
 
-                  {/* Social Links */}
-                  <div className="absolute bottom-4 left-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button
-                      className="w-10 h-10 bg-background/90 rounded-lg flex items-center justify-center hover:bg-background transition-colors"
-                      aria-label={`Connect with ${member.name} on LinkedIn`}
-                    >
-                      <Linkedin className="w-4 h-4 text-foreground" />
-                    </button>
-                    <button
-                      className="w-10 h-10 bg-background/90 rounded-lg flex items-center justify-center hover:bg-background transition-colors"
-                      aria-label={`Send an email to ${member.name}`}
-                    >
-                      <Mail className="w-4 h-4 text-foreground" />
-                    </button>
+              // Position alignment for the row container: center members are centered, Harold is offset left
+              const rowJustifyClass = isCenter 
+                ? "justify-center" 
+                : "justify-center md:-translate-x-24"; 
+
+              // Flex direction: image-then-text (image on left, description on right) for everyone
+              const flexDirClass = "flex-col md:flex-row";
+
+              // Text alignment: aligned to the image (left-aligned) for everyone
+              const textAlignClass = "text-center md:text-left";
+
+              return (
+                <div 
+                  key={idx} 
+                  className={`flex ${rowJustifyClass}`}
+                >
+                  <div className={`flex ${flexDirClass} items-center gap-8 max-w-3xl w-full`}>
+                    {/* Spherical Image */}
+                    <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0 shadow-md group">
+                      <Image 
+                        src={member.image} 
+                        alt={member.name} 
+                        fill 
+                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    {/* Plain Text Content */}
+                    <div className={`flex-1 ${textAlignClass}`}>
+                      <h3 className="font-display text-2xl font-bold text-foreground mb-1">
+                        {member.name}
+                      </h3>
+                      <p className="text-sm font-semibold text-primary mb-2">
+                        {member.role}
+                      </p>
+                      <p className="text-muted-foreground leading-relaxed">
+                        {member.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-bold text-foreground mb-1">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm font-medium text-primary mb-3">
-                    {member.role}
-                  </p>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {member.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
-
       {/* Join Us */}
       <section className="py-20 bg-secondary/30">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
             Join Our Mission
           </h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             We&apos;re always looking for talented individuals who share our
             passion for environmental innovation and sustainable development in
             Africa.
           </p>
-          <a
-            href="mailto:mencinecoltd@gmail.com?subject=Career%20Inquiry"
-            className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-8 py-4 rounded-xl font-semibold hover:bg-primary/90 transition-colors"
-            aria-label="Send us a career inquiry email"
-          >
-            <Mail className="w-5 h-5" />
-            Get in Touch
-          </a>
         </div>
       </section>
     </main>

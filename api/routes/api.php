@@ -5,6 +5,10 @@ use App\Http\Controllers\components\RequestQuote\RequestQuoteController;
 use App\Http\Controllers\components\contact_inquiry\ContactController;
 
 Route::post("/request-quote", [RequestQuoteController::class, "store"]);
+Route::get("/inquiries/{id}/view", [
+    RequestQuoteController::class,
+    "view",
+])->name("inquiry.view");
 Route::post("/contact", [ContactController::class, "store"]);
 
 Route::get("/test-email", function () {
