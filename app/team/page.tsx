@@ -12,13 +12,13 @@ const teamMembers = [
   {
     name: "Ms. Tarsila Faustin Mellita",
     role: "Founder & CEO",
-    image: "/images/team-tarsila.jpg",
+    image: "/personel/Tarsila_Profile_JPG.jpg.jpeg",
     description:
       "Social entrepreneur, environmental advocate, and Founder & CEO of Mencine Co. LTD. With over six years of experience in climate action and a background in Economics, she drives sustainable menstrual waste management. Tarsila leads the development of eco-friendly incineration solutions, fostering gender equality and cleaner communities across East Africa.",
   },
   {
     name: "Mr. Harold Nakembetwa",
-    role: "Lead Mechanical Expert",
+    role: "Lead Technical Expert",
     image: "/images/team-donald.jpg",
     description:
       "Translates complex thermodynamic simulations and SolidWorks designs into physical prototypes, heading mechanical engineering efforts to ensure high-performance, durable, and environmentally clean incineration systems.",

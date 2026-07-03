@@ -12,7 +12,7 @@
     <div style="background-color: #ffffff; color: #1A2942; padding: 15px; text-align: center; border-radius: 5px 5px 0 0;">
         <!-- Company logo -->
         <div style="margin-bottom: 10px;">
-            <img src="{{ $message->embed(base_path('../public/images/MENCINE.png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 180px; height: auto;">
+            <img src="{{ $message->embed(base_path('../public/images/WIKI CLUB LOGO (5).png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 180px; height: auto;">
         </div>
         <h1 style="margin: 0; font-size: 24px;">Thank You for Contacting Us</h1>
     </div>

@@ -9,7 +9,7 @@
     <div style="background-color: #ffffff; padding: 0; border: 1px solid #e1e8ed; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
         <!-- Header with Logo and Badge -->
         <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid #f0f4f8;">
-            <img src="{{ $message->embed(base_path('../public/images/MENCINE.png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 140px; height: auto; margin-bottom: 15px;">
+            <img src="{{ $message->embed(base_path('../public/images/WIKI CLUB LOGO (5).png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 140px; height: auto; margin-bottom: 15px;">
             <h1 style="margin: 0; color: #1A2942; font-size: 24px; font-weight: bold; display: flex; align-items: center; justify-content: center;">
                 New Incinerator Inquiry
                 <span style="background-color: #E5B168; color: #ffffff; font-size: 12px; padding: 4px 10px; border-radius: 20px; margin-left: 10px; text-transform: uppercase; letter-spacing: 0.5px;">

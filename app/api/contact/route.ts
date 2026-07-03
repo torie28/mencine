@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const logoUrl = "https://mencine.vercel.app/images/MENCINE.png";
+    const logoUrl = "https://mencine.vercel.app/images/WIKI%20CLUB%20LOGO%20(5).png";
     const siteUrl = "https://mencine.vercel.app";
 
     // 1. Company Notification Email Template

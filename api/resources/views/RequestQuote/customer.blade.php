@@ -9,7 +9,7 @@
     <div style="background-color: #ffffff; padding: 0; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
         <!-- Header with Logo -->
         <div style="padding: 30px 20px; text-align: center;">
-            <img src="{{ $message->embed(base_path('../public/images/MENCINE.png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 150px; height: auto; margin-bottom: 20px;">
+            <img src="{{ $message->embed(base_path('../public/images/WIKI CLUB LOGO (5).png')) }}" alt="Mencine Co Ltd Logo" style="max-width: 150px; height: auto; margin-bottom: 20px;">
             <h1 style="margin: 0; color: #1A2942; font-size: 26px; font-weight: bold;">Thank You for Your Incinerator Inquiry</h1>
         </div>
 
