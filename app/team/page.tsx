@@ -18,14 +18,14 @@ const teamMembers = [
   },
   {
     name: "Mr. Harold Nakembetwa",
-    role: "Lead Technical Expert",
+    role: "Co-founder and Chief Technical Officer (CTO)",
     image: "/personel/halod.png",
     description:
-      "Translates complex thermodynamic simulations and SolidWorks designs into physical prototypes, heading mechanical engineering efforts to ensure high-performance, durable, and environmentally clean incineration systems.",
+      "Youth innovation leader, Mechatronics and Materials Engineer, and Chief Technical Officer at Mencine Company. Harold strategically applies his technical background to prototype eco-friendly incinerators and drive community-centered solutions. He excels at bridging the gap between technical design and real-world impact.",
   },
   {
     name: "Ms. Rosemary Haule",
-    role: "Chief Operating Officer (COO)",
+    role: "Co-founder and Chief Operating Officer (COO)",
     image: "/personel/rosemarry.png",
     description:
       "Biomedical Engineer and Chief Operating Officer (COO) at Mencine Company. She directs day-to-day operations and program execution, utilizing her analytical background and structured, problem-solving approach to bridge the gap between technical development and executive business strategy.",
