@@ -80,12 +80,12 @@ export default function TeamPage() {
                 >
                   <div className={`flex ${flexDirClass} items-center gap-8 max-w-3xl w-full`}>
                     {/* Spherical Image */}
-                    <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0 shadow-md group">
+                    <div className="relative w-56 h-56 md:w-64 md:h-64 rounded-full overflow-hidden flex-shrink-0 shadow-md group">
                       <Image 
                         src={member.image} 
                         alt={member.name} 
                         fill 
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       />
                     </div>
                     {/* Plain Text Content */}
