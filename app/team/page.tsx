@@ -19,14 +19,14 @@ const teamMembers = [
   {
     name: "Mr. Harold Nakembetwa",
     role: "Lead Technical Expert",
-    image: "/images/team-donald.jpg",
+    image: "/personel/halod.png",
     description:
       "Translates complex thermodynamic simulations and SolidWorks designs into physical prototypes, heading mechanical engineering efforts to ensure high-performance, durable, and environmentally clean incineration systems.",
   },
   {
     name: "Ms. Rosemary Haule",
     role: "Chief Operating Officer (COO)",
-    image: "/images/team-noela.jpg",
+    image: "/personel/rosemarry.png",
     description:
       "Biomedical Engineer and Chief Operating Officer (COO) at Mencine Company. She directs day-to-day operations and program execution, utilizing her analytical background and structured, problem-solving approach to bridge the gap between technical development and executive business strategy.",
   },
